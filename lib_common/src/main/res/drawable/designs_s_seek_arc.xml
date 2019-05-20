@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape
+            android:shape="oval">
+            <size android:width="24dp"
+                android:height="24dp"/>
+            <solid android:color="#00d0ff"/>
+
+            <stroke
+                android:width="16dp"
+                android:color="#1070e4f9"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <layer-list>
+
+            <item>
+                <shape
+                    android:shape="ring"
+                    android:innerRadius="8dp"
+                    android:thickness="4dp"
+                    android:useLevel="false">
+                    <solid android:color="#70e4f9"/>
+                </shape>
+            </item>
+            <item>
+                <shape
+                    android:shape="oval">
+                    <size android:width="24dp"
+                        android:height="24dp"/>
+                    <solid android:color="#00d0ff"/>
+                    <stroke
+                        android:width="16dp"
+                        android:color="#3070e4f9"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_selected="true">
+        <shape
+        android:shape="oval">
+        <size android:width="24dp"
+            android:height="24dp"/>
+        <solid android:color="#00d0ff"/>
+
+        <stroke
+            android:width="16dp"
+            android:color="#2070e4f9"/>
+    </shape>
+    </item>
+
+    <item>
+        <shape
+            android:shape="oval">
+            <size android:width="24dp"
+                android:height="24dp"/>
+            <solid android:color="#56e0ff"/>
+            <stroke
+                android:width="16dp"
+                android:color="#3070e4f9"/>
+        </shape>
+    </item>
+</selector>

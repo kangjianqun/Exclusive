@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_layout_bg"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/dialog_iView_loading"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/design_svg_loading_circle"/>
+
+    <TextView
+        android:id="@+id/dialog_tView_message"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="初始化数据加载中...."/>
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="designs_default_h">100dp</dimen>
+    <dimen name="designs_default_w">100dp</dimen>
+    <dimen name="designs_4">4dp</dimen>
+</resources>

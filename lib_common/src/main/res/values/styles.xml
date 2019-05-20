@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" tools:ignore="ResourceName">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/common_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/common_colorPrimaryDark</item>
+        <item name="colorAccent">@color/common_colorAccent</item>
+    </style>
+
+    <style name="designs_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+    
+    <style name="DesignsEditTextWhite" parent="AppTheme">
+        <!--未被选中时下划线的颜色-->
+        <item name="colorControlNormal">#FFFFFF</item>
+        <!--输入框的左内边框-->
+        <item name="android:paddingLeft">16dp</item>
+        <!--文本的颜色-->
+        <!--<item name="android:textColor">#000</item>-->
+        <!--被选中时下划线的颜色-->
+        <item name="colorControlActivated">#FFFFFF</item>
+    </style>
+
+    <!--btn 下一步按钮属性-->
+    <style name="DesignsNextOk">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <!--<item name="android:background">@drawable/bg_theme_color</item>-->
+    </style>
+
+    <!--Space间距属性-->
+    <style name="DesignsSpaceMin">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:background">#949494</item>
+    </style>
+
+    <!--btn 下一步按钮属性-->
+    <style name="DesignsNextNo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <!--<item name="android:background">@drawable/bg_no_color</item>-->
+    </style>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="titleTxt"
+            type="String"/>
+        <variable
+            name="hintTxt"
+            type="String"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dONO_tView_title"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:text="@{titleTxt}"
+            tools:text="提示标题"/>
+
+        <TextView
+            android:id="@+id/dONO_tView_hint"
+            app:layout_constraintTop_toBottomOf="@id/dONO_tView_title"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="80dp"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="@{hintTxt}"
+            tools:text="提示的内容"/>
+
+        <include
+            app:layout_constraintTop_toTopOf="@id/dONO_tView_ok"
+            layout="@layout/designs_include_wire"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/dONO_tView_ok"
+            app:layout_constraintTop_toBottomOf="@id/dONO_tView_hint"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dONO_tView_no"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="确定"/>
+
+        <include
+            app:layout_constraintTop_toBottomOf="@id/dONO_tView_hint"
+            app:layout_constraintLeft_toRightOf="@id/dONO_tView_ok"
+            app:layout_constraintRight_toLeftOf="@id/dONO_tView_no"
+            layout="@layout/designs_include_wire"
+            android:layout_width="1dp"
+            android:layout_height="48dp"/>
+
+        <TextView
+            android:id="@+id/dONO_tView_no"
+            app:layout_constraintTop_toBottomOf="@id/dONO_tView_hint"
+            app:layout_constraintLeft_toRightOf="@id/dONO_tView_ok"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:text="取消"/>
+
+        <include
+            app:layout_constraintBottom_toBottomOf="@id/dONO_tView_ok"
+            layout="@layout/designs_include_wire"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

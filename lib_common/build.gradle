@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+android {
+    compileSdkVersion build_versions.target_sdk
+    defaultConfig {
+        resourcePrefix "common_"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    androidExtensions {
+        experimental = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api deps.androidx.androidx
+    api deps.androidx.constraintlayout
+    api deps.androidx.recyclerview
+    api deps.androidx.multidex
+    api deps.androidx.cardview
+    api deps.androidx.vectordrawable
+    api deps.androidx.legacy
+
+    api deps.androidx.lifecycle
+
+    api deps.rx_android
+    api deps.rxjava2
+    api deps.rxlifecycle
+    api deps.rxlifecycle_components
+    api deps.rxbinding
+
+    api deps.support.design
+    api deps.okHttp
+    api deps.retrofit
+    api deps.converter_gson
+    api deps.adapter_rxjava
+
+    api deps.gson
+
+    api deps.glide
+    annotationProcessor deps.glide_compiler
+    api 'com.alibaba:fastjson:1.2.33'
+
+    api deps.arouter_api
+    api deps.acra
+
+    api deps.kotlin.stdlib
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

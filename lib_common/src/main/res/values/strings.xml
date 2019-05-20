@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_toast_text">发生崩溃</string>
+    <string name="common_dialog_text">发生了崩溃，请帮助我们进行改进</string>
+    <string name="common_dialog_title">崩溃提示</string>
+    <string name="common_default_txt">默认文本</string>
+    <string name="common_checked_default">默认选中文本</string>
+    <string name="common_toast_disconnect">与服务器断开连接，请检查网络后重试!</string>
+    <string name="common_loading">正在加载 请稍后…</string>
+    <string name="common_loading_failed">加载失败</string>
+    <string name="common_loading_end">加载完成</string>
+</resources>
