@@ -44,9 +44,9 @@ public class BaseTitle implements View.OnClickListener {
     public ObservableField<String> mSOField_txt = new ObservableField<>("默认标题");
     private boolean mB_ok;
 
-    private BaseTitle(Activity activity,@ColorRes int themeColor) {
+    private BaseTitle(Activity activity) {
         mActivity = activity;
-        if (insertRootLayout(themeColor)){
+        if (insertRootLayout()){
             mV_menu = mBinding.dBTitleMenu;
             mBinding.dBTitleTViewTxt.setSelected(true);
             mBinding.setBaseTitle(this);
@@ -57,14 +57,12 @@ public class BaseTitle implements View.OnClickListener {
     /**
      * 将标题插入跟布局
      */
-    @SuppressLint("ResourceAsColor")
-    private boolean insertRootLayout(@ColorRes int themeColor){
+    private boolean insertRootLayout(){
         View root = Utils.getRootView(mActivity);
         mB_ok = root instanceof LinearLayout;
         if (mB_ok) {
             LinearLayout rootView = (LinearLayout) root;
             mBinding = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.common_base_title, null,false);
-            mBinding.dBTitleRoot.setBackgroundColor(themeColor);
             view = mBinding.getRoot();
             int sI_height = ScreenSizeUtils.INSTANCE.dp2px(mActivity, TITLE_HEIGHT);
 //            int top = 0;
@@ -100,8 +98,8 @@ public class BaseTitle implements View.OnClickListener {
     public static class Builder{
         private BaseTitle mBaseTitle;
 
-        public Builder(Activity activity,@ColorRes int themeColor) {
-            mBaseTitle = new BaseTitle(activity,themeColor);
+        public Builder(Activity activity) {
+            mBaseTitle = new BaseTitle(activity);
         }
 
         public void setTitleGone(boolean isGoone){

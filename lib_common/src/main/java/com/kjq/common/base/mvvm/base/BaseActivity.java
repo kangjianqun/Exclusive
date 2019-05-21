@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.kjq.common.ui.designs.title.BaseTitle;
 import com.kjq.common.utils.bus.Messenger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -28,6 +29,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected V binding;
     protected VM viewModel;
     private int viewModelId;
+    private BaseTitle.Builder mBTitle_Builder;
 //    private MaterialDialog dialog;
 
     @Override
@@ -35,10 +37,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         super.onCreate(savedInstanceState);
         //页面接受的参数方法
         initParam();
-        //私有的初始化Databinding和ViewModel方法
+        //私有的初始化DataBinding和ViewModel方法
         initViewDataBinding(savedInstanceState);
+        //初始化标题
+        initTitle();
         //私有的ViewModel与View的契约事件回调逻辑
-        registorUIChangeLiveDataCallBack();
+        registeredUIChangeLiveDataCallBack();
         //页面数据初始化方法
         initData();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
@@ -89,6 +93,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         viewModel.injectLifecycleProvider(this);
     }
 
+    private void initTitle(){
+//        mBTitle_Builder = new BaseTitle.Builder(this);
+    }
+
     //刷新布局
     public void refreshLayout() {
         if (viewModel != null) {
@@ -101,7 +109,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * =====================================================================
      **/
     //注册ViewModel与View的契约UI回调事件
-    protected void registorUIChangeLiveDataCallBack() {
+    protected void registeredUIChangeLiveDataCallBack() {
         //加载对话框显示
         viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override
