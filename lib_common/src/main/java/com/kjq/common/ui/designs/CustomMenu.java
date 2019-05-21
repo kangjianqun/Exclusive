@@ -85,7 +85,7 @@ public class CustomMenu extends LinearLayout {
 
     private void init(Context context, AttributeSet attributeSet){
         /*配置*/
-        LayoutInflater.from(context).inflate(R.layout.designs_custom_menu,this,true);
+        LayoutInflater.from(context).inflate(R.layout.common_custom_menu,this,true);
         mImgV_left = findViewById(R.id.cMenu_left);
         mTexV_menuTxt = findViewById(R.id.cMenu_menuTxt);
         mTexV_secondaryTxt = findViewById(R.id.cMenu_secondaryTxt);
@@ -95,24 +95,24 @@ public class CustomMenu extends LinearLayout {
 
         /*赋值*/
         @SuppressLint({"Recycle", "CustomViewStyleable"})
-        TypedArray sTypedArray = context.obtainStyledAttributes(attributeSet,R.styleable.DesignsCustomMenu);
+        TypedArray sTypedArray = context.obtainStyledAttributes(attributeSet,R.styleable.CommonCustomMenu);
 
-        boolean mB_isLeft = sTypedArray.getBoolean(R.styleable.DesignsCustomMenu_designs_isLeft, true);
-        int mI_leftImgID = sTypedArray.getResourceId(R.styleable.DesignsCustomMenu_designs_leftID, R.drawable.designs_svg_menu_black_24dp);
+        boolean mB_isLeft = sTypedArray.getBoolean(R.styleable.CommonCustomMenu_commonIsLeft, true);
+        int mI_leftImgID = sTypedArray.getResourceId(R.styleable.CommonCustomMenu_commonLeftID, R.drawable.common_svg_menu_black_24dp);
 
-        String mS_menuTxt = sTypedArray.getString(R.styleable.DesignsCustomMenu_designs_menuTxt);
-        int sI_menuTxtColor = sTypedArray.getColor(R.styleable.DesignsCustomMenu_designs_menuTxtColor, ContextCompat.getColor(context,R.color.common_default_txt_gray));
-        int sI_menuTxtSize = sTypedArray.getInt(R.styleable.DesignsCustomMenu_designs_menuTxtSize,14);
-        String mS_secondaryTxt = sTypedArray.getString(R.styleable.DesignsCustomMenu_designs_secondaryTxt);
+        String mS_menuTxt = sTypedArray.getString(R.styleable.CommonCustomMenu_commonMenuTxt);
+        int sI_menuTxtColor = sTypedArray.getColor(R.styleable.CommonCustomMenu_commonMenuTxtColor, ContextCompat.getColor(context,R.color.common_default_txt_gray));
+        int sI_menuTxtSize = sTypedArray.getInt(R.styleable.CommonCustomMenu_commonMenuTxtSize,14);
+        String mS_secondaryTxt = sTypedArray.getString(R.styleable.CommonCustomMenu_commonSecondaryTxt);
 
-        boolean sB_isSWitch = sTypedArray.getBoolean(R.styleable.DesignsCustomMenu_designs_isSwitch,false);
-        int sI_switchStyle = sTypedArray.getInt(R.styleable.DesignsCustomMenu_designs_switchStyle,R.style.Widget_AppCompat_CompoundButton_Switch);
+        boolean sB_isSWitch = sTypedArray.getBoolean(R.styleable.CommonCustomMenu_commonIsSwitch,false);
+        int sI_switchStyle = sTypedArray.getInt(R.styleable.CommonCustomMenu_commonSwitchStyle,R.style.Widget_AppCompat_CompoundButton_Switch);
 
-        boolean mB_isRight = sTypedArray.getBoolean(R.styleable.DesignsCustomMenu_designs_isRight, true);
-        int mI_rightImgID = sTypedArray.getResourceId(R.styleable.DesignsCustomMenu_designs_rightID, R.drawable.designs_svg_keyboard_arrow_right_black_24dp);
+        boolean mB_isRight = sTypedArray.getBoolean(R.styleable.CommonCustomMenu_commonIsRight, true);
+        int mI_rightImgID = sTypedArray.getResourceId(R.styleable.CommonCustomMenu_commonRightID, R.drawable.common_svg_keyboard_arrow_right_black_24dp);
 
         /*控件属性*/
-        boolean mB_isWire = sTypedArray.getBoolean(R.styleable.DesignsCustomMenu_designs_isWire, true);
+        boolean mB_isWire = sTypedArray.getBoolean(R.styleable.CommonCustomMenu_commonIsWire, true);
 
         /*绑定*/
         setB_isLeft(mB_isLeft);

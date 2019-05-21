@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 
-import com.kjq.common.databinding.DesignsItemMenuDefaultBinding;
+import com.kjq.common.databinding.CommonItemMenuDefaultBinding;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class DefaultAdapter<Model extends PopMenuModel> extends BaseAdapter<Mode
     }
 
     public class ViewHolder extends BaseViewHolder {
-        DesignsItemMenuDefaultBinding mItemMenuDefaultBinding;
+        CommonItemMenuDefaultBinding mItemMenuDefaultBinding;
         public ViewHolder(View itemView) {
             super(itemView);
             mItemMenuDefaultBinding = DataBindingUtil.bind(itemView);

@@ -38,9 +38,9 @@ public class RecyclerViewExtend extends androidx.recyclerview.widget.RecyclerVie
 
     private void initAttrs(Context context, AttributeSet attrs) {
         @SuppressLint("CustomViewStyleable")
-        TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.DesignsRecycleViewExtend);
+        TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.CommonRecycleViewExtend);
 
-        mMaxHeight = a.getDimension(R.styleable.DesignsRecycleViewExtend_designsRVExtendMaxHeight,DEFAULT_MAX_HEIGHT);
+        mMaxHeight = a.getDimension(R.styleable.CommonRecycleViewExtend_commonRVExtendMaxHeight,DEFAULT_MAX_HEIGHT);
         a.recycle();
     }
 

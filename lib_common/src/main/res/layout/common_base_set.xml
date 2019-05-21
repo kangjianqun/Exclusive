@@ -62,14 +62,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/designs_svg_keyboard_arrow_right_black_24dp" />
+                app:srcCompat="@drawable/common_svg_keyboard_arrow_right_black_24dp" />
 
             <Switch
                 android:id="@+id/designs_bSet_rightSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:thumb="@drawable/designs_switch_thumb_selector"
-                android:track="@drawable/designs_switch_track_selector"
+                android:thumb="@drawable/common_switch_thumb_selector"
+                android:track="@drawable/common_switch_track_selector"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

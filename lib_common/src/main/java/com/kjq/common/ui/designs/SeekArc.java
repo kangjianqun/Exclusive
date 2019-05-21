@@ -140,7 +140,7 @@ public class SeekArc extends View {
 
     public SeekArc(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, R.attr.designs_seekArcStyle);
+        init(context, attrs, R.attr.commonSeekArcStyle);
     }
 
     public SeekArc(Context context, AttributeSet attrs, int defStyle) {
@@ -159,7 +159,7 @@ public class SeekArc extends View {
         int progressColor = res.getColor(R.color.common_default_blue_light);
         int thumbHalfheight = 0;
         int thumbHalfWidth = 0;
-        mThumb = res.getDrawable(R.drawable.designs_s_seek_arc);
+        mThumb = res.getDrawable(R.drawable.common_s_seek_arc);
         // Convert progress width to pixels for current density
         mProgressWidth = (int) (mProgressWidth * density);
 
@@ -167,9 +167,9 @@ public class SeekArc extends View {
         if (attrs != null) {
             // Attribute initialization
             final TypedArray a = context.obtainStyledAttributes(attrs,
-                    R.styleable.DesignsSeekArc, defStyle, 0);
+                    R.styleable.CommonSeekArc, defStyle, 0);
 
-            Drawable thumb = a.getDrawable(R.styleable.DesignsSeekArc_designs_thumb);
+            Drawable thumb = a.getDrawable(R.styleable.CommonSeekArc_commonThumb);
             if (thumb != null) {
                 mThumb = thumb;
             }
@@ -181,25 +181,25 @@ public class SeekArc extends View {
             mThumb.setBounds(-thumbHalfWidth, -thumbHalfheight, thumbHalfWidth,
                     thumbHalfheight);
 
-            mMax = a.getInteger(R.styleable.DesignsSeekArc_designs_max, mMax);
-            mProgress = a.getInteger(R.styleable.DesignsSeekArc_designs_progressMy, mProgress);
+            mMax = a.getInteger(R.styleable.CommonSeekArc_commonMax, mMax);
+            mProgress = a.getInteger(R.styleable.CommonSeekArc_commonProgressMy, mProgress);
             mProgressWidth = (int) a.getDimension(
-                    R.styleable.DesignsSeekArc_designs_progressWidth, mProgressWidth);
-            mArcWidth = (int) a.getDimension(R.styleable.DesignsSeekArc_designs_arcWidth,
+                    R.styleable.CommonSeekArc_commonProgressWidth, mProgressWidth);
+            mArcWidth = (int) a.getDimension(R.styleable.CommonSeekArc_commonArcWidth,
                     mArcWidth);
-            mStartAngle = a.getInt(R.styleable.DesignsSeekArc_designs_startAngle, mStartAngle);
-            mSweepAngle = a.getInt(R.styleable.DesignsSeekArc_designs_sweepAngle, mSweepAngle);
-            mRotation = a.getInt(R.styleable.DesignsSeekArc_designs_rotationMy, mRotation);
-            mRoundedEdges = a.getBoolean(R.styleable.DesignsSeekArc_designs_roundEdges,
+            mStartAngle = a.getInt(R.styleable.CommonSeekArc_commonStartAngle, mStartAngle);
+            mSweepAngle = a.getInt(R.styleable.CommonSeekArc_commonSweepAngle, mSweepAngle);
+            mRotation = a.getInt(R.styleable.CommonSeekArc_commonRotationMy, mRotation);
+            mRoundedEdges = a.getBoolean(R.styleable.CommonSeekArc_commonRoundEdges,
                     mRoundedEdges);
-            mTouchInside = a.getBoolean(R.styleable.DesignsSeekArc_designs_touchInside,
+            mTouchInside = a.getBoolean(R.styleable.CommonSeekArc_commonTouchInside,
                     mTouchInside);
-            mClockwise = a.getBoolean(R.styleable.DesignsSeekArc_designs_clockwise,
+            mClockwise = a.getBoolean(R.styleable.CommonSeekArc_commonClockwise,
                     mClockwise);
-            mEnabled = a.getBoolean(R.styleable.DesignsSeekArc_designs_enabled, mEnabled);
+            mEnabled = a.getBoolean(R.styleable.CommonSeekArc_commonEnabled, mEnabled);
 
-            arcColor = a.getColor(R.styleable.DesignsSeekArc_designs_arcColor, arcColor);
-            progressColor = a.getColor(R.styleable.DesignsSeekArc_designs_progressColor,
+            arcColor = a.getColor(R.styleable.CommonSeekArc_commonArcColor, arcColor);
+            progressColor = a.getColor(R.styleable.CommonSeekArc_commonProgressColor,
                     progressColor);
 
             a.recycle();

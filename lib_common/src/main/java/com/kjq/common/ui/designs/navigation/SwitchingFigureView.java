@@ -66,12 +66,12 @@ public class SwitchingFigureView extends LinearLayout {
 
     private void initAttr(Context context,AttributeSet attributeSet){
         @SuppressLint("CustomViewStyleable")
-        final TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.DesignsSwitchingFigureView);
-        if (a.hasValue(R.styleable.DesignsSwitchingFigureView_designsDSFSparseArrayMethod)){
-            mS_methodName = a.getString(R.styleable.DesignsSwitchingFigureView_designsDSFSparseArrayMethod);
+        final TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.CommonSwitchingFigureView);
+        if (a.hasValue(R.styleable.CommonSwitchingFigureView_commonDSFSparseArrayMethod)){
+            mS_methodName = a.getString(R.styleable.CommonSwitchingFigureView_commonDSFSparseArrayMethod);
         }
-        if (a.hasValue(R.styleable.DesignsSwitchingFigureView_designsDSFSparseArrayMethodClassName)){
-            mS_className = a.getString(R.styleable.DesignsSwitchingFigureView_designsDSFSparseArrayMethodClassName);
+        if (a.hasValue(R.styleable.CommonSwitchingFigureView_commonDSFSparseArrayMethodClassName)){
+            mS_className = a.getString(R.styleable.CommonSwitchingFigureView_commonDSFSparseArrayMethodClassName);
         }
         a.recycle();
     }

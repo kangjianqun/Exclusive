@@ -71,7 +71,7 @@
         <include
             android:id="@+id/dValue_wire_bottom"
             app:layout_constraintTop_toBottomOf="@id/dValue_eText_value"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toTopOf="@id/dValue_tView_ok"
             app:layout_constraintLeft_toRightOf="@id/dValue_tView_ok"
             app:layout_constraintRight_toLeftOf="@id/dValue_tView_no"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="1dp"
             android:layout_height="48dp"/>
 
@@ -109,7 +109,7 @@
 
         <include
             app:layout_constraintBottom_toBottomOf="@id/dValue_tView_ok"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

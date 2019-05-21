@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil;
 
 
 import com.kjq.common.R;
-import com.kjq.common.databinding.DesignsDialogTimeSelectDefaultBinding;
+import com.kjq.common.databinding.CommonDialogTimeSelectDefaultBinding;
 import com.kjq.common.ui.designs.dialog.litener.ViewEven;
 import com.kjq.common.ui.designs.dialog.model.RecyclerData;
 
@@ -28,7 +28,7 @@ public class DialogFactory {
      */
     @SuppressLint("ResourceType")
     public static <Dialog extends DialogBase> Dialog getDialogRV(Context context, ArrayList<RecyclerData> recyclerData, ViewEven viewEven){
-        return getDialogRV(context,recyclerData, R.layout.designs_dialog_recycler_view_default,R.id.designs_dCView_content, R.layout.common_item_dialog_default,viewEven);
+        return getDialogRV(context,recyclerData, R.layout.common_dialog_recycler_view_default,R.id.designs_dCView_content, R.layout.common_item_dialog_default,viewEven);
     }
 
     /**
@@ -80,7 +80,7 @@ public class DialogFactory {
      * @return 继承DialogBase的基类
      */
     public static <Dialog extends DialogBase> Dialog getDialogCViewTransparent(Context context, @LayoutRes int layoutId, ViewEven viewEven){
-        return getDialogCView(context,R.style.designs_dialog,layoutId,viewEven);
+        return getDialogCView(context,R.style.CommonDialog,layoutId,viewEven);
     }
 
     /**
@@ -142,7 +142,7 @@ public class DialogFactory {
 
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_value_default;
+                return R.layout.common_dialog_value_default;
             }
         };
         sDialogCView.mB_isBack = isBack;
@@ -162,7 +162,7 @@ public class DialogFactory {
             }
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_ok_no_default;
+                return R.layout.common_dialog_ok_no_default;
             }
         };
         sDialogCView.mB_isBack = isBack;
@@ -182,7 +182,7 @@ public class DialogFactory {
             }
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_ok_no_default;
+                return R.layout.common_dialog_ok_no_default;
             }
         };
         sDialogCView.mB_isBack = isBack;
@@ -206,13 +206,13 @@ public class DialogFactory {
         DialogCView sDialogCView = new DialogCView(context) {
             @Override
             public void setEven(View view) {
-                DesignsDialogTimeSelectDefaultBinding sBinding = DataBindingUtil.bind(view);
+                CommonDialogTimeSelectDefaultBinding sBinding = DataBindingUtil.bind(view);
                 sBinding.dTSDefaultMinute.setVisibility(View.GONE);
                 sBinding.dTSDefaultMinuteHint.setVisibility(View.GONE);
             }
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_time_select_default;
+                return R.layout.common_dialog_time_select_default;
             }
         };
         sDialogCView.setTimeSelectDialog(hour,null);
@@ -227,7 +227,7 @@ public class DialogFactory {
             }
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_time_select_default;
+                return R.layout.common_dialog_time_select_default;
             }
         };
         sDialogCView.setTimeSelectDialog(hour,minute);
@@ -246,7 +246,7 @@ public class DialogFactory {
             }
             @Override
             protected int getLayoutResId() {
-                return R.layout.designs_dialog_time_two_select_default;
+                return R.layout.common_dialog_time_two_select_default;
             }
         };
         sDialogCView.setTimeSelectDialog(hour,minute,twoHour,twoMinute);

@@ -27,7 +27,7 @@
             android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/designs_svg_chevron_left_black_24dp" />
+            app:srcCompat="@drawable/common_svg_chevron_left_black_24dp" />
 
         <TextView
             android:id="@+id/dBTitle_tView_txt"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/designs_svg_menu_black_24dp" />
+            app:srcCompat="@drawable/common_svg_menu_black_24dp" />
 
         <TextView
             android:onClick="@{click}"

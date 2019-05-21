@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/common_colorAccent</item>
     </style>
 
-    <style name="designs_dialog" parent="@android:style/Theme.Dialog">
+    <style name="CommonDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -19,7 +19,7 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
     
-    <style name="DesignsEditTextWhite" parent="AppTheme">
+    <style name="CommonEditTextWhite" parent="AppTheme">
         <!--未被选中时下划线的颜色-->
         <item name="colorControlNormal">#FFFFFF</item>
         <!--输入框的左内边框-->
@@ -31,7 +31,7 @@
     </style>
 
     <!--btn 下一步按钮属性-->
-    <style name="DesignsNextOk">
+    <style name="CommonNextOk">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginLeft">10dp</item>
@@ -43,14 +43,14 @@
     </style>
 
     <!--Space间距属性-->
-    <style name="DesignsSpaceMin">
+    <style name="CommonSpaceMin">
         <item name="android:layout_width">16dp</item>
         <item name="android:layout_height">16dp</item>
         <item name="android:background">#949494</item>
     </style>
 
     <!--btn 下一步按钮属性-->
-    <style name="DesignsNextNo">
+    <style name="CommonNextNo">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginLeft">10dp</item>

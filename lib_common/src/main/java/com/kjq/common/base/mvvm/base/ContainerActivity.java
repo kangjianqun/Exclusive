@@ -28,7 +28,7 @@ public class ContainerActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.kang_activity_container);
+        setContentView(R.layout.common_activity_container);
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = null;
         if (savedInstanceState != null) {

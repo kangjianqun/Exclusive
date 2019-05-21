@@ -41,7 +41,7 @@
 
         <include
             app:layout_constraintTop_toTopOf="@id/dONO_tView_ok"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@id/dONO_tView_hint"
             app:layout_constraintLeft_toRightOf="@id/dONO_tView_ok"
             app:layout_constraintRight_toLeftOf="@id/dONO_tView_no"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="1dp"
             android:layout_height="48dp"/>
 
@@ -79,7 +79,7 @@
 
         <include
             app:layout_constraintBottom_toBottomOf="@id/dONO_tView_ok"
-            layout="@layout/designs_include_wire"
+            layout="@layout/common_include_wire"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

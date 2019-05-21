@@ -7,10 +7,10 @@ import android.widget.NumberPicker;
 import androidx.annotation.StyleRes;
 import androidx.databinding.DataBindingUtil;
 
-import com.kjq.common.databinding.DesignsDialogOkNoDefaultBinding;
-import com.kjq.common.databinding.DesignsDialogTimeSelectDefaultBinding;
-import com.kjq.common.databinding.DesignsDialogTimeTwoSelectDefaultBinding;
-import com.kjq.common.databinding.DesignsDialogValueDefaultBinding;
+import com.kjq.common.databinding.CommonDialogOkNoDefaultBinding;
+import com.kjq.common.databinding.CommonDialogTimeSelectDefaultBinding;
+import com.kjq.common.databinding.CommonDialogTimeTwoSelectDefaultBinding;
+import com.kjq.common.databinding.CommonDialogValueDefaultBinding;
 import com.kjq.common.ui.designs.dialog.litener.ViewEven;
 import com.kjq.common.utils.DateAndTimeUtil;
 import com.kjq.common.utils.data.StringUtils;
@@ -48,7 +48,7 @@ public abstract class DialogCView extends DialogBase {
     public abstract void setEven (View view);
 
     public void setValueDialog(){
-        final DesignsDialogValueDefaultBinding sBinding = DataBindingUtil.bind(getView());
+        final CommonDialogValueDefaultBinding sBinding = DataBindingUtil.bind(getView());
         if (sBinding == null) {
             return;
         }
@@ -76,7 +76,7 @@ public abstract class DialogCView extends DialogBase {
     }
 
     void setReconfirmDialog(){
-        final DesignsDialogOkNoDefaultBinding sBinding = DataBindingUtil.bind(getView());
+        final CommonDialogOkNoDefaultBinding sBinding = DataBindingUtil.bind(getView());
         if (sBinding == null) {
             return;
         }
@@ -124,7 +124,7 @@ public abstract class DialogCView extends DialogBase {
 
     void setTimeSelectDialog(String hour, String minute){
         int sI_hour = 8,sI_minute = 30;
-        final DesignsDialogTimeSelectDefaultBinding sBinding = DataBindingUtil.bind(getView());
+        final CommonDialogTimeSelectDefaultBinding sBinding = DataBindingUtil.bind(getView());
         final NumberPicker sPicker_hour = sBinding.dTSDefaultHour;
         sPicker_hour.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         sPicker_hour.setMaxValue(23);
@@ -162,7 +162,7 @@ public abstract class DialogCView extends DialogBase {
 
     void setTimeSelectDialog(String hour, String minute,String twoHour,String twoMinute){
         int sI_hour = 8,sI_twoHour = 8,sI_minute = 30,sI_twoMinute = 30;
-        final DesignsDialogTimeTwoSelectDefaultBinding sBinding = DataBindingUtil.bind(getView());
+        final CommonDialogTimeTwoSelectDefaultBinding sBinding = DataBindingUtil.bind(getView());
         final NumberPicker sPicker_hour = sBinding.dTTSDefaultOneHour;
         sPicker_hour.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         sPicker_hour.setMaxValue(23);

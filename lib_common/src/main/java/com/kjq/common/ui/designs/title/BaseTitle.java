@@ -17,7 +17,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableField;
 
 import com.kjq.common.R;
-import com.kjq.common.databinding.DesignsBaseTitleBinding;
+import com.kjq.common.databinding.CommonBaseTitleBinding;
 import com.kjq.common.ui.designs.title.annotation.AnnTitle;
 import com.kjq.common.ui.designs.title.event.TitleClickListener;
 import com.kjq.common.utils.SVGUtils;
@@ -35,7 +35,7 @@ import static com.kjq.common.utils.data.Constant.AppInfo.TITLE_HEIGHT;
  */
 public class BaseTitle implements View.OnClickListener {
 
-    public DesignsBaseTitleBinding mBinding;
+    public CommonBaseTitleBinding mBinding;
     private Activity mActivity;
     private TitleClickListener mTitleClickListener;
     private View view;
@@ -63,7 +63,7 @@ public class BaseTitle implements View.OnClickListener {
         mB_ok = root instanceof LinearLayout;
         if (mB_ok) {
             LinearLayout rootView = (LinearLayout) root;
-            mBinding = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.designs_base_title, null,false);
+            mBinding = DataBindingUtil.inflate(LayoutInflater.from(mActivity), R.layout.common_base_title, null,false);
             mBinding.dBTitleRoot.setBackgroundColor(themeColor);
             view = mBinding.getRoot();
             int sI_height = ScreenSizeUtils.INSTANCE.dp2px(mActivity, TITLE_HEIGHT);
@@ -121,7 +121,7 @@ public class BaseTitle implements View.OnClickListener {
         }
 
         public void setTitleLsftSignColor(@ColorRes int colorRes){
-            SVGUtils.INSTANCE.svgHint(Utils.getContext(),mBaseTitle.mBinding.dBTitleImgBtnBack,R.drawable.designs_svg_chevron_left_black_24dp,colorRes);
+            SVGUtils.INSTANCE.svgHint(Utils.getContext(),mBaseTitle.mBinding.dBTitleImgBtnBack,R.drawable.common_svg_chevron_left_black_24dp,colorRes);
         }
 
         public TitleClickListener getTitleClickListener() {

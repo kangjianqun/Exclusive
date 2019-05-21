@@ -31,6 +31,6 @@ public class DefaultPopMenu<Model extends PopMenuModel> extends PopMenu<Model> {
 
     @Override
     protected BaseAdapter onCreateAdapter(Context context, ArrayList itemList) {
-        return new DefaultAdapter(context,itemList,R.layout.designs_item_menu_default);
+        return new DefaultAdapter(context,itemList,R.layout.common_item_menu_default);
     }
 }

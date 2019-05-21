@@ -62,7 +62,7 @@ public class ImageTextView extends ConstraintLayout implements View.OnClickListe
         String sS_txt = sTypedArray.getString(R.styleable.CommonImageTextView_commonITViewTxt);
         int sI_txtColor = sTypedArray.getColor(R.styleable.CommonImageTextView_commonITViewTxtColor, Color.BLACK);
 
-        int sI_signId = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSign, R.drawable.designs_svg_star_black_24dp);
+        int sI_signId = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSign, R.drawable.common_svg_star_black_24dp);
         int sI_signBgId = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSignBg, R.drawable.common_svg_explode_effects_circle);
 
         int sI_signW = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSignW, 64);

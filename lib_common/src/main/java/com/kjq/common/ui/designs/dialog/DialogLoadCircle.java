@@ -25,7 +25,7 @@ import com.kjq.common.R;
 public class DialogLoadCircle {
 
     private static Dialog createDialog(Activity activity, String msg){
-        View sView = LayoutInflater.from(activity).inflate(R.layout.designs_dialog_load_circle,null);
+        View sView = LayoutInflater.from(activity).inflate(R.layout.common_dialog_load_circle,null);
 //        获取整个布局
         LinearLayout sLayout = sView.findViewById(R.id.dialog_layout_bg);
 //        页面中的Img
@@ -33,13 +33,13 @@ public class DialogLoadCircle {
 //        页面中的提示文本
         TextView textView = sView.findViewById(R.id.dialog_tView_message);
 //        加载动画，动画用户使img图片不停的旋转
-        Animation animation = AnimationUtils.loadAnimation(activity,R.anim.designs_dialog_anim);
+        Animation animation = AnimationUtils.loadAnimation(activity,R.anim.common_dialog_anim);
 //        显示动画
         img.setAnimation(animation);
 //        显示文本
         textView.setText(msg);
 //        创建自定义样式
-        Dialog _dialog = new Dialog(activity, R.style.designs_dialog);
+        Dialog _dialog = new Dialog(activity, R.style.CommonDialog);
 //        设置返回键无效
 //        _dialog.setCancelable(false);
         DisplayMetrics dm = new DisplayMetrics();

@@ -32,7 +32,7 @@ public class MyItemDecoration extends RecyclerView.ItemDecoration {
 
     public MyItemDecoration(Context context,int orientation){
         this.mContext = context;
-        this.mDivider = this.mContext.getResources().getDrawable(R.drawable.designs_adapter_recycler_view_divider);
+        this.mDivider = this.mContext.getResources().getDrawable(R.drawable.common_adapter_recycler_view_divider);
         setOrientation(orientation);
     }
 
@@ -44,7 +44,7 @@ public class MyItemDecoration extends RecyclerView.ItemDecoration {
 
     public MyItemDecoration(Context context,int orientation,int paddingT,int paddingD,int paddingL,int paddingR){
         this.mContext = context;
-        this.mDivider = this.mContext.getResources().getDrawable(R.drawable.designs_adapter_recycler_view_divider);
+        this.mDivider = this.mContext.getResources().getDrawable(R.drawable.common_adapter_recycler_view_divider);
         mI_paddingT = paddingT;
         mI_paddingD = paddingD;
         mI_paddingL = paddingL;

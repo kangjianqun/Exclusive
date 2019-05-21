@@ -16,74 +16,74 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="DesignsLinearLayoutExtend">
-        <attr name="designsLLExtendMaxHeight" format="reference|integer"/>
+    <declare-styleable name="CommonLinearLayoutExtend">
+        <attr name="commonLLExtendMaxHeight" format="reference|integer"/>
     </declare-styleable>
 
-    <declare-styleable name="DesignsRecycleViewExtend">
-        <attr name="designsRVExtendMaxHeight" format="reference|integer"/>
+    <declare-styleable name="CommonRecycleViewExtend">
+        <attr name="commonRVExtendMaxHeight" format="reference|integer"/>
     </declare-styleable>
 
-    <declare-styleable name="DesignsSingleSet">
-        <attr name="designsSSetTxt" format="reference|string"/>
-        <attr name="designsSSetTxtColor" format="reference|color"/>
-        <attr name="designsSSetSecondaryTxt" format="reference|string"/>
-        <attr name="designsSSetSecondaryTxtColor" format="reference|color"/>
-        <attr name="designsSSetRightStyle" format="enum">
+    <declare-styleable name="CommonSingleSet">
+        <attr name="commonSSetTxt" format="reference|string"/>
+        <attr name="commonSSetTxtColor" format="reference|color"/>
+        <attr name="commonSSetSecondaryTxt" format="reference|string"/>
+        <attr name="commonSSetSecondaryTxtColor" format="reference|color"/>
+        <attr name="commonSSetRightStyle" format="enum">
             <enum name="img" value="0"/>
             <enum name="onOff" value="1"/>
             <enum name="txt" value="2"/>
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="DesignsSwitchingFigureView">
-        <attr name="designsDSFSparseArrayMethod" format="reference|string"/>
-        <attr name="designsDSFSparseArrayMethodClassName" format="reference|string"/>
+    <declare-styleable name="CommonSwitchingFigureView">
+        <attr name="commonDSFSparseArrayMethod" format="reference|string"/>
+        <attr name="commonDSFSparseArrayMethodClassName" format="reference|string"/>
     </declare-styleable>
 
 
     <!--自定义单行菜单属性-->
-    <declare-styleable name="DesignsCustomMenu">
-        <attr name="designs_isLeft" format="boolean"/>
-        <attr name="designs_leftID" format="reference"/>
-        <attr name="designs_menuTxt" format="string"/>
-        <attr name="designs_menuTxtSize" format="integer|reference"/>
-        <attr name="designs_menuTxtColor" format="color|reference"/>
-        <attr name="designs_secondaryTxt" format="string"/>
-        <attr name="designs_isRight" format="boolean"/>
-        <attr name="designs_rightID" format="reference"/>
-        <attr name="designs_isWire" format="boolean"/>
-        <attr name="designs_isSwitch" format="boolean"/>
-        <attr name="designs_switchStyle" format="reference"/>
+    <declare-styleable name="CommonCustomMenu">
+        <attr name="commonIsLeft" format="boolean"/>
+        <attr name="commonLeftID" format="reference"/>
+        <attr name="commonMenuTxt" format="string"/>
+        <attr name="commonMenuTxtSize" format="integer|reference"/>
+        <attr name="commonMenuTxtColor" format="color|reference"/>
+        <attr name="commonSecondaryTxt" format="string"/>
+        <attr name="commonIsRight" format="boolean"/>
+        <attr name="commonRightID" format="reference"/>
+        <attr name="commonIsWire" format="boolean"/>
+        <attr name="commonIsSwitch" format="boolean"/>
+        <attr name="commonSwitchStyle" format="reference"/>
     </declare-styleable>
 
     <!--item侧滑删除属性-->
 
-    <declare-styleable name="DesignsItemMenuLayout">
-        <attr name="designsSwipeEnable" format="boolean"/>
-        <attr name="designsIos" format="boolean"/>
-        <attr name="designsLeftSwipe" format="boolean"/>
+    <declare-styleable name="CommonItemMenuLayout">
+        <attr name="commonSwipeEnable" format="boolean"/>
+        <attr name="commonIos" format="boolean"/>
+        <attr name="commonLeftSwipe" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="DesignsSeekArc">
-        <attr name="designs_thumb" format="reference" />
-        <attr name="designs_thumbOffset" format="dimension" />
-        <attr name="designs_max" format="integer" />
-        <attr name="designs_progressWidth" format="dimension" />
-        <attr name="designs_arcWidth" format="dimension" />
-        <attr name="designs_progressMy" format="integer" />
-        <attr name="designs_rotationMy" format="integer" />
-        <attr name="designs_startAngle" format="integer" />
-        <attr name="designs_sweepAngle" format="integer" />
-        <attr name="designs_arcColor" format="color" />
-        <attr name="designs_progressColor" format="color" />
-        <attr name="designs_roundEdges" format="boolean" />
-        <attr name="designs_touchInside" format="boolean" />
-        <attr name="designs_clockwise" format="boolean" />
-        <attr name="designs_enabled" format="boolean" />
+    <declare-styleable name="CommonSeekArc">
+        <attr name="commonThumb" format="reference" />
+        <attr name="commonThumbOffset" format="dimension" />
+        <attr name="commonMax" format="integer" />
+        <attr name="commonProgressWidth" format="dimension" />
+        <attr name="commonArcWidth" format="dimension" />
+        <attr name="commonProgressMy" format="integer" />
+        <attr name="commonRotationMy" format="integer" />
+        <attr name="commonStartAngle" format="integer" />
+        <attr name="commonSweepAngle" format="integer" />
+        <attr name="commonArcColor" format="color" />
+        <attr name="commonProgressColor" format="color" />
+        <attr name="commonRoundEdges" format="boolean" />
+        <attr name="commonTouchInside" format="boolean" />
+        <attr name="commonClockwise" format="boolean" />
+        <attr name="commonEnabled" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="DesignsSeekArcTheme">
-        <attr name="designs_seekArcStyle" format="reference"/>
+    <declare-styleable name="CommonSeekArcTheme">
+        <attr name="commonSeekArcStyle" format="reference"/>
     </declare-styleable>
 </resources>

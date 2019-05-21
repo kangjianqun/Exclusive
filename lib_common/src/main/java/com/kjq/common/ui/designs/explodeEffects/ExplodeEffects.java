@@ -277,7 +277,7 @@ public class ExplodeEffects extends RelativeLayout {
         //开始动画
         view.startAnimation(animationSet);
 
-        Animation animation = AnimationUtils.loadAnimation(this.getContext(),R.anim.designs_dialog_anim);
+        Animation animation = AnimationUtils.loadAnimation(this.getContext(),R.anim.common_dialog_anim);
 //        显示动画
         iv.setAnimation(animation);
     }
@@ -300,7 +300,7 @@ public class ExplodeEffects extends RelativeLayout {
             animationSet.setAnimationListener(new ReStartAnimationListener(mView,mV_img));
             //开始动画
             mView.startAnimation(animationSet);
-            Animation animationR = AnimationUtils.loadAnimation(mV_img.getContext(),R.anim.designs_dialog_anim);
+            Animation animationR = AnimationUtils.loadAnimation(mV_img.getContext(),R.anim.common_dialog_anim);
 //        显示动画
             mV_img.setAnimation(animationR);
         }

@@ -13,7 +13,7 @@
         android:id="@+id/dialog_iView_loading"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        app:srcCompat="@drawable/design_svg_loading_circle"/>
+        app:srcCompat="@drawable/common_svg_loading_circle"/>
 
     <TextView
         android:id="@+id/dialog_tView_message"

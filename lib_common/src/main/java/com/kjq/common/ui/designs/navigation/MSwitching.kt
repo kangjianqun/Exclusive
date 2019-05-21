@@ -10,8 +10,8 @@ import com.kjq.common.R
  * @version 1.0.0
  */
 class MSwitching {
-    var imageRes = R.drawable.designs_svg_star_black_24dp
-    var imageClickRes = R.drawable.designs_svg_star_black_24dp
+    var imageRes = R.drawable.common_svg_star_black_24dp
+    var imageClickRes = R.drawable.common_svg_star_black_24dp
     var txtRes = R.string.common_default_txt
     var txtClickRes = R.string.common_checked_default
     var txtColorIntegerRes = R.color.common_control_white

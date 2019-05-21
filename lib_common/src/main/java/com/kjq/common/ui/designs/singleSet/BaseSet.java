@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
 import com.kjq.common.R;
-import com.kjq.common.databinding.DesignsBaseSetBinding;
+import com.kjq.common.databinding.CommonBaseSetBinding;
 import com.kjq.common.utils.data.StringUtils;
 
 
@@ -23,7 +23,7 @@ import com.kjq.common.utils.data.StringUtils;
  */
 public class BaseSet extends ConstraintLayout {
 
-    private DesignsBaseSetBinding mBinding;
+    private CommonBaseSetBinding mBinding;
 
     public BaseSet(Context context) {
         super(context);
@@ -41,27 +41,27 @@ public class BaseSet extends ConstraintLayout {
 
     private void initView(AttributeSet attributeSet){
         Context sContext = getContext();
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(sContext), R.layout.designs_base_set,this,true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(sContext), R.layout.common_base_set,this,true);
         if (attributeSet != null){
             @SuppressLint("CustomViewStyleable")
-            TypedArray sTypedArray = sContext.obtainStyledAttributes(attributeSet, R.styleable.DesignsSingleSet);
+            TypedArray sTypedArray = sContext.obtainStyledAttributes(attributeSet, R.styleable.CommonSingleSet);
             initAttr(sTypedArray);
             sTypedArray.recycle();
         }
     }
 
     private void initAttr(TypedArray typedArray) {
-        String sS_txt = typedArray.getString(R.styleable.DesignsSingleSet_designsSSetTxt);
+        String sS_txt = typedArray.getString(R.styleable.CommonSingleSet_commonSSetTxt);
         setTxt(sS_txt);
 
 
 
-        String sS_rightStyle = typedArray.getString(R.styleable.DesignsSingleSet_designsSSetRightStyle);
+        String sS_rightStyle = typedArray.getString(R.styleable.CommonSingleSet_commonSSetRightStyle);
         setRightStyle(sS_rightStyle);
 
 
 
-        String sS_secondaryTxt = typedArray.getString(R.styleable.DesignsSingleSet_designsSSetSecondaryTxt);
+        String sS_secondaryTxt = typedArray.getString(R.styleable.CommonSingleSet_commonSSetSecondaryTxt);
         setSecondaryTxt(sS_secondaryTxt);
     }
 
