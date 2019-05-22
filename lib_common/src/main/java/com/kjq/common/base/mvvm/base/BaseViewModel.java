@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
@@ -46,6 +47,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     public ObservableField<String> mOFS_titleText = new ObservableField<>("");
     //右边文字
     public ObservableField<String> mOFS_rightText = new ObservableField<>("更多");
+    public ObservableInt mOI_titleVisibility = new ObservableInt(View.VISIBLE);
     //右边文字的观察者
     public ObservableInt mOI_txtVisibility = new ObservableInt(View.GONE);
     //右边图标的观察者
@@ -246,6 +248,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      */
     protected void setTitleTextVisible(int visibility) {
         mOI_txtVisibility.set(visibility);
+    }
+
+    protected void setTitleVisibility(int visibility){
+        mOI_titleVisibility.set(visibility);
     }
 
     /**

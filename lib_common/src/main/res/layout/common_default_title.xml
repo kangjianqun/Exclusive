@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?colorPrimary"
-        app:contentInsetStart="0dp">
+        app:contentInsetStart="0dp"
+        android:visibility="@{baseViewModel.mOI_titleVisibility}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
