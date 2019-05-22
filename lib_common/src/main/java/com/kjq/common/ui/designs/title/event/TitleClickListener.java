@@ -1,5 +1,7 @@
 package com.kjq.common.ui.designs.title.event;
 
+import android.view.View;
+
 /**
  * <p>标题点击监听</p>
  *
@@ -8,5 +10,5 @@ package com.kjq.common.ui.designs.title.event;
  */
 public interface TitleClickListener {
     void back();
-    void menu();
+    void menu(View view);
 }

@@ -3,10 +3,10 @@ package com.kjq.common.ui.designs.familyTree;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.kjq.common.utils.application.BaseApplication;
 import com.kjq.common.utils.AssetsUtil;
 import com.kjq.common.utils.DateAndTimeUtil;
 import com.kjq.common.utils.Utils;
-import com.kjq.common.utils.application.BaseApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +22,11 @@ public class Data  {
     }
 
     public static Data getInstance() {
-        Data sData = (Data) BaseApplication.getIns().getArrayValue(1111111);
+        Data sData = (Data) BaseApplication.getInstance().getArrayValue(1111111);
 
         if (sData == null){
             sData = new Data();
-            BaseApplication.getIns().setPutArray(1111111,sData);
+            BaseApplication.getInstance().setPutArray(1111111,sData);
         }
         return sData;
     }

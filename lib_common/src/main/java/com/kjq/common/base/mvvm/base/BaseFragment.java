@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.kjq.common.ui.designs.title.BaseTitle;
 import com.kjq.common.utils.bus.Messenger;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -69,8 +70,10 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         super.onViewCreated(view, savedInstanceState);
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding();
+        //初始化标题
+        initTitle();
         //私有的ViewModel与View的契约事件回调逻辑
-        registorUIChangeLiveDataCallBack();
+        registeredUIChangeLiveDataCallBack();
         //页面数据初始化方法
         initData();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
@@ -103,11 +106,17 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModel.injectLifecycleProvider(this);
     }
 
+
+    private void initTitle(){
+        BaseTitle.insertRootLayout(getActivity(),viewModel);
+        viewModel.initToolbar();
+    }
+
     /**
      * =====================================================================
      **/
     //注册ViewModel与View的契约UI回调事件
-    protected void registorUIChangeLiveDataCallBack() {
+    protected void registeredUIChangeLiveDataCallBack() {
         //加载对话框显示
         viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override

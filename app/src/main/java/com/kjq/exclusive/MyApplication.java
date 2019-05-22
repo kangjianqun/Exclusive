@@ -1,14 +1,12 @@
 package com.kjq.exclusive;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.kjq.common.base.mvvm.base.BaseApplication;
-import com.kjq.common.utils.SPUtil;
+import com.kjq.common.utils.application.BaseApplication;
 import com.kjq.common.utils.Utils;
 
 import org.acra.ACRA;

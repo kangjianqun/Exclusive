@@ -82,4 +82,14 @@ public class LoginViewModel extends BaseViewModel<DemoRepository> {
                 }));
 
     }
+
+    @Override
+    public void back() {
+        ToastUtils.showShort("111");
+    }
+
+    @Override
+    public void menu(View view) {
+        ToastUtils.showShort("222");
+    }
 }

@@ -2,13 +2,20 @@ package com.kjq.common.base.mvvm.base;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
+import com.kjq.common.ui.designs.title.event.TitleClickListener;
+import com.kjq.common.utils.AppManager;
+import com.kjq.common.utils.binding.command.BindingAction;
+import com.kjq.common.utils.binding.command.BindingCommand;
 import com.kjq.common.utils.bus.event.SingleLiveEvent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
@@ -25,13 +32,24 @@ import io.reactivex.functions.Consumer;
 /**
  * Created by goldze on 2017/6/15.
  */
-public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
+public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel
+        , Consumer<Disposable>
+        , TitleClickListener {
     protected M model;
     private UIChangeLiveData uc;
     //弱引用持有
     private WeakReference<LifecycleProvider> lifecycle;
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
     private CompositeDisposable mCompositeDisposable;
+
+    //标题文字
+    public ObservableField<String> mOFS_titleText = new ObservableField<>("");
+    //右边文字
+    public ObservableField<String> mOFS_rightText = new ObservableField<>("更多");
+    //右边文字的观察者
+    public ObservableInt mOI_txtVisibility = new ObservableInt(View.GONE);
+    //右边图标的观察者
+    public ObservableInt mOI_menuVisibility = new ObservableInt(View.GONE);
 
     public BaseViewModel(@NonNull Application application) {
         this(application, null);
@@ -137,6 +155,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         uc.finishEvent.call();
     }
 
+    protected void initToolbar(){
+
+    }
+
     /**
      * 返回上一层
      */
@@ -195,6 +217,76 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     @Override
     public void accept(Disposable disposable) throws Exception {
         addSubscribe(disposable);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param text 标题文字
+     */
+    protected void setTitleText(String text) {
+        mOFS_titleText.set(text);
+        mOI_menuVisibility.set(View.VISIBLE);
+    }
+
+    /**
+     * 设置右边文字
+     *
+     * @param text 右边文字
+     */
+    protected void setRightText(String text) {
+        mOFS_rightText.set(text);
+        mOI_txtVisibility.set(View.VISIBLE);
+    }
+
+    /**
+     * 设置右边文字的显示和隐藏
+     *
+     * @param visibility
+     */
+    protected void setTitleTextVisible(int visibility) {
+        mOI_txtVisibility.set(visibility);
+    }
+
+    /**
+     * 设置右边图标的显示和隐藏
+     *
+     * @param visibility
+     */
+    protected void setTitleMenuVisible(int visibility) {
+        mOI_menuVisibility.set(visibility);
+    }
+
+    /**
+     * 返回按钮的点击事件
+     */
+    public final BindingCommand backOnClick = new BindingCommand(new BindingAction() {
+        @Override
+        public void call(View view) {
+            back();
+        }
+    });
+
+    public BindingCommand rightOnClick = new BindingCommand(new BindingAction() {
+        @Override
+        public void call(View view) {
+            menu(view);
+        }
+    });
+
+    @Override
+    public void back() {
+        AppManager sAppManager = AppManager.getAppManager();
+        if (sAppManager.isFragment()){
+            sAppManager.removeFragment(sAppManager.currentFragment());
+        }else {
+            sAppManager.removeActivity(sAppManager.currentActivity());
+        }
+    }
+
+    @Override
+    public void menu(View view) {
+
     }
 
     public final class UIChangeLiveData extends SingleLiveEvent {

@@ -1,38 +1,27 @@
 package com.kjq.common.utils.application;
 
+
+import android.app.Activity;
+import android.app.Application;
+import android.os.Bundle;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
 
+import com.kjq.common.utils.AppManager;
 import com.kjq.common.utils.ScreenSizeUtils;
 import com.kjq.common.utils.Utils;
 import com.kjq.common.utils.data.Constant;
 
 import java.util.List;
 
-import androidx.multidex.MultiDexApplication;
 
 /**
- * 要想使用BaseApplication，必须在组件中实现自己的Application，并且继承BaseApplication；
- * 组件中实现的Application必须在debug包中的AndroidManifest.xml中注册，否则无法使用；
- * 组件的Application需置于java/debug文件夹中，不得放于主代码；
- * 组件中获取Context的方法必须为:Utils.getContext()，不允许其他写法；
- *
- * @author 2016/12/2 17:02
- * @version V1.0.0
- * @name BaseApplication
+ * Created by goldze on 2017/6/15.
  */
-public class BaseApplication extends MultiDexApplication {
-    public static final String ROOT_PACKAGE = "com.kang.module";
 
+public class BaseApplication extends Application {
     private static BaseApplication sInstance;
-
-    private List<IApplicationDelegate> mAppDelegateList;
-
-
-    public static BaseApplication getIns() {
-        return sInstance;
-    }
-
     private SparseArray<Object> mObjectSparseArray = new SparseArray<>();
 
     public void setPutArray(int key,Object o){
@@ -46,39 +35,61 @@ public class BaseApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = this;
-//        Logger.init("pattern").logLevel(LogLevel.FULL);
-        Utils.init(this);
+        setApplication(this);
         Constant.AppInfo.H = ScreenSizeUtils.INSTANCE.getDisplayH();
-        mAppDelegateList = ClassUtils.getObjectsWithInterface(this, IApplicationDelegate.class, ROOT_PACKAGE);
-        for (IApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onCreate();
-        }
-
     }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        for (IApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onTerminate();
-        }
+    /**
+     * 当主工程没有继承BaseApplication时，可以使用setApplication方法初始化BaseApplication
+     *
+     * @param application
+     */
+    public static synchronized void setApplication(@NonNull BaseApplication application) {
+        sInstance = application;
+        //初始化工具类
+        Utils.init(application);
+        //注册监听每个activity的生命周期,便于堆栈式管理
+        application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                AppManager.getAppManager().addActivity(activity);
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                AppManager.getAppManager().removeActivity(activity);
+            }
+        });
     }
 
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        for (IApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onLowMemory();
+    /**
+     * 获得当前app运行的Application
+     */
+    public static BaseApplication getInstance() {
+        if (sInstance == null) {
+            throw new NullPointerException("please inherit BaseApplication or call setApplication.");
         }
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        for (IApplicationDelegate delegate : mAppDelegateList) {
-            delegate.onTrimMemory(level);
-        }
+        return sInstance;
     }
 }
