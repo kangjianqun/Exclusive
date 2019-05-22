@@ -1,11 +1,15 @@
 package com.kjq.common.base.mvvm.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -30,7 +34,16 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     protected V binding;
     protected VM viewModel;
     private int viewModelId;
+    private BaseActivity mBaseActivity;
+    public BaseTitle.Builder mBuilder;
 //    private MaterialDialog dialog;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mBaseActivity = (BaseActivity)activity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,10 +81,9 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBuilder = mBaseActivity.mBuilder;
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding();
-        //初始化标题
-        initTitle();
         //私有的ViewModel与View的契约事件回调逻辑
         registeredUIChangeLiveDataCallBack();
         //页面数据初始化方法
@@ -106,9 +118,16 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModel.injectLifecycleProvider(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //初始化标题
+        initTitle();
+    }
 
     private void initTitle(){
-        BaseTitle.insertRootLayout(getActivity(),viewModel);
+//        BaseTitle.insertRootLayout(getActivity(),viewModel);
+        mBuilder.setVM(viewModel);
         viewModel.initToolbar();
     }
 

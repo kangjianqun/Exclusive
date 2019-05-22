@@ -29,6 +29,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected V binding;
     protected VM viewModel;
     private int viewModelId;
+    public BaseTitle.Builder mBuilder;
 
 //    private MaterialDialog dialog;
 
@@ -94,7 +95,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     private void initTitle(){
-        BaseTitle.insertRootLayout(this,viewModel);
+        mBuilder = new BaseTitle.Builder(this,viewModel);
         viewModel.initToolbar();
     }
 
