@@ -5,16 +5,22 @@
             name="viewModel"
             type="com.kjq.common.base.mvvm.base.BaseViewModel" />
     </data>
-    <FrameLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.main.BlankFragment">
+        <com.kjq.common.ui.designs.CustomMenu
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.kjq.common.ui.designs.CustomMenu>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_dark_background"
             android:text="hahaha"/>
-    </FrameLayout>
+    </LinearLayout>
 </layout>

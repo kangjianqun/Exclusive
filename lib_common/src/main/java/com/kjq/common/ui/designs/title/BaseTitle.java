@@ -32,11 +32,9 @@ import static com.kjq.common.utils.data.Constant.AppInfo.TITLE_HEIGHT;
  * @author 康建群 948182974---->>>2018/9/10 9:22
  * @version 1.0.0
  */
-public class BaseTitle implements View.OnClickListener {
+public class BaseTitle {
 
-    private TitleClickListener mTitleClickListener;
     private CommonDefaultTitleBinding mBinding ;
-
     private BaseTitle(Activity activity, BaseViewModel viewModel) {
         insertRootLayout(activity,viewModel);
     }
@@ -72,18 +70,6 @@ public class BaseTitle implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mTitleClickListener == null) return;
-        int sI_id = v.getId();
-        if (v == mBinding.commonDefaultTitleIvBack){
-
-        }else if (v == mBinding.commonDefaultTitleTvRightText){
-
-        }else if (v == mBinding.commonDefaultTitleIvRightIcon){
-
-        }
-    }
 
     public static class Builder {
         private BaseTitle mBaseTitle;

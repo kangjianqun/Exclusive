@@ -126,6 +126,17 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         uc.startActivityEvent.postValue(params);
     }
 
+    public void addFragment(BaseFragment baseFragment){
+        uc.addFragment.postValue(baseFragment);
+    }
+
+    public void showFragment(BaseFragment baseFragment,int tag){
+        Map<String, Object> params = new HashMap<>();
+        params.put(ParameterField.BASE_FRAGMENT,baseFragment);
+        params.put(ParameterField.FRAGMENT_TAG,tag);
+        uc.showFragment.postValue(params);
+    }
+
     /**
      * 跳转容器页面
      *
@@ -298,6 +309,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     public final class UIChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
+        private SingleLiveEvent<BaseFragment> addFragment;
+        private SingleLiveEvent<Map<String,Object>> showFragment;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startContainerActivityEvent;
         private SingleLiveEvent<Void> finishEvent;
@@ -309,6 +322,14 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
         public SingleLiveEvent<Void> getDismissDialogEvent() {
             return dismissDialogEvent = createLiveData(dismissDialogEvent);
+        }
+
+        public SingleLiveEvent<BaseFragment> getAddFragment(){
+            return addFragment = createLiveData(addFragment);
+        }
+
+        public SingleLiveEvent<Map<String, Object>> getShowFragment() {
+            return showFragment = createLiveData(showFragment);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {
@@ -341,6 +362,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     public static final class ParameterField {
+        public static final String FRAGMENT_TAG = "fragmentTag";
+        public static final String BASE_FRAGMENT = "baseFragment";
         public static String CLASS = "CLASS";
         public static String CANONICAL_NAME = "CANONICAL_NAME";
         public static String BUNDLE = "BUNDLE";

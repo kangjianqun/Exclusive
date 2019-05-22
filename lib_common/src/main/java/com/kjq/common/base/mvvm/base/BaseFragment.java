@@ -48,7 +48,10 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initParam();
+
+        if (null != getArguments()) {
+            initParam(getArguments(),null);
+        }
     }
 
     @Override
@@ -150,6 +153,14 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
                 dismissDialog();
             }
         });
+
+        viewModel.getUC().getAddFragment().observe(this, new Observer<BaseFragment>() {
+            @Override
+            public void onChanged(BaseFragment baseFragment) {
+                addFragment(baseFragment);
+            }
+        });
+
         //跳入新页面
         viewModel.getUC().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
@@ -159,15 +170,16 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
                 startActivity(clz, bundle);
             }
         });
-        //跳入ContainerActivity
+        //跳入GeneralShowActivity
         viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
-                String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
+                String sPath = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
                 Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
-                startContainerActivity(canonicalName, bundle);
+                startGeneralShowActivity(sPath, bundle);
             }
         });
+
         //关闭界面
         viewModel.getUC().getFinishEvent().observe(this, new Observer<Void>() {
             @Override
@@ -225,26 +237,44 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     /**
      * 跳转容器页面
      *
-     * @param canonicalName 规范名 : Fragment.class.getCanonicalName()
+     * @param sPath
      */
-    public void startContainerActivity(String canonicalName) {
-        startContainerActivity(canonicalName, null);
+    public void startGeneralShowActivity(String sPath) {
+        startGeneralShowActivity(sPath, null);
     }
 
     /**
      * 跳转容器页面
      *
-     * @param canonicalName 规范名 : Fragment.class.getCanonicalName()
+     * @param sPath
      * @param bundle        跳转所携带的信息
      */
-    public void startContainerActivity(String canonicalName, Bundle bundle) {
-        Intent intent = new Intent(getContext(), ContainerActivity.class);
-        intent.putExtra(ContainerActivity.FRAGMENT, canonicalName);
-        if (bundle != null) {
-            intent.putExtra(ContainerActivity.BUNDLE, bundle);
+    public void startGeneralShowActivity(String sPath, Bundle bundle) {
+        if (bundle == null){
+            startActivity(GeneralShowActivity.getNewIntent(getContext(),sPath));
+        }else {
+            startActivity(GeneralShowActivity.getNewIntent(getContext(),sPath,bundle));
         }
-        startActivity(intent);
     }
+
+    /*添加fragment*/
+    protected void addFragment(BaseFragment fragment) {
+        if (null != fragment) {
+            mBaseActivity.addFragment(fragment);
+        }
+    }
+
+    /*添加fragment*/
+    protected void addFragment(int layId,BaseFragment fragment) {
+        if (null != fragment) {
+            mBaseActivity.addFragment(layId,fragment);
+        }
+    }
+
+//    /*移除fragment*/
+//    protected void removeFragment() {
+//        mBaseActivity.removeFragment();
+//    }
 
     /**
      * =====================================================================
@@ -258,7 +288,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     @Override
-    public void initParam() {
+    public void initParam(Bundle fragmentOfBundle, Intent activityIntent) {
 
     }
 

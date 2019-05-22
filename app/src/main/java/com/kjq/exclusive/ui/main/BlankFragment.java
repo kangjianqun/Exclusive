@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.kjq.common.base.mvvm.base.BaseFragment;
 import com.kjq.exclusive.BR;
 import com.kjq.exclusive.R;
@@ -18,6 +19,7 @@ import com.kjq.exclusive.databinding.FragmentBlankBinding;
 /**
  * A simple {@link Fragment} subclass.
  */
+@Route(path = "/app/blank")
 public class BlankFragment extends BaseFragment<FragmentBlankBinding,BlankVM> {
 
 

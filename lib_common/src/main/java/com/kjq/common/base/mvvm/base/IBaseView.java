@@ -1,5 +1,8 @@
 package com.kjq.common.base.mvvm.base;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 /**
  * Created by goldze on 2017/6/15.
  */
@@ -8,7 +11,7 @@ public interface IBaseView {
     /**
      * 初始化界面传递参数
      */
-    void initParam();
+    void initParam(Bundle fragmentOfBundle, Intent activityIntent);
     /**
      * 初始化数据
      */

@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?colorPrimary"
-        app:contentInsetStart="0dp"
-        android:visibility="@{baseViewModel.mOI_titleVisibility}">
+        app:contentInsetStart="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:visibility="@{baseViewModel.mOI_titleVisibility}">
 
             <ImageView
                 android:id="@+id/common_defaultTitle_iv_back"

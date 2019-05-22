@@ -1,9 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion build_versions.target_sdk
+
     defaultConfig {
+
         resourcePrefix "common_"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
@@ -12,6 +16,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     dataBinding {
@@ -31,6 +41,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    kapt deps.arouter_compiler
 
     api deps.androidx.androidx
     api deps.androidx.constraintlayout

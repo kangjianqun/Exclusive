@@ -2,11 +2,15 @@ package com.kjq.common.base.mvvm.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseArray;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
@@ -30,6 +34,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected VM viewModel;
     private int viewModelId;
     public BaseTitle.Builder mBuilder;
+    private int mI_fragmentGroupLayoutId;
+    private SparseArray<BaseFragment> mSArray_fragment = new SparseArray<>();
 
 //    private MaterialDialog dialog;
 
@@ -37,13 +43,17 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //页面接受的参数方法
-        initParam();
+
+        if (null != getIntent()){
+            initParam(null,getIntent());
+        }
         //私有的初始化DataBinding和ViewModel方法
         initViewDataBinding(savedInstanceState);
         //初始化标题
         initTitle();
         //私有的ViewModel与View的契约事件回调逻辑
         registeredUIChangeLiveDataCallBack();
+        mI_fragmentGroupLayoutId = getI_fragmentGroupLayoutId();
         //页面数据初始化方法
         initData();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
@@ -126,6 +136,23 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
                 dismissDialog();
             }
         });
+
+        viewModel.getUC().getAddFragment().observe(this, new Observer<BaseFragment>() {
+            @Override
+            public void onChanged(BaseFragment baseFragment) {
+                addFragment(baseFragment);
+            }
+        });
+
+        viewModel.getUC().getShowFragment().observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(Map<String, Object> params) {
+                BaseFragment sBaseFragment = (BaseFragment) params.get(BaseViewModel.ParameterField.BASE_FRAGMENT);
+                int sI_tag = (int) params.get(BaseViewModel.ParameterField.FRAGMENT_TAG);
+                showFragment(sBaseFragment,sI_tag);
+            }
+        });
+
         //跳入新页面
         viewModel.getUC().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
@@ -135,13 +162,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
                 startActivity(clz, bundle);
             }
         });
-        //跳入ContainerActivity
+        //跳入GeneralShowActivity
         viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 String canonicalName = (String) params.get(BaseViewModel.ParameterField.CANONICAL_NAME);
                 Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
-                startContainerActivity(canonicalName, bundle);
+                startGeneralShowActivity(canonicalName, bundle);
             }
         });
         //关闭界面
@@ -175,6 +202,53 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 //        }
     }
 
+    /* 添加fragment */
+    public void addFragment(BaseFragment fragment) {
+        addFragment(mI_fragmentGroupLayoutId == 0 ? mI_fragmentGroupLayoutId : getI_fragmentGroupLayoutId(),fragment);
+    }
+
+    /* 添加fragment */
+    public void addFragment(int layId,BaseFragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(layId, fragment, fragment.getClass().getSimpleName())
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .commitAllowingStateLoss();
+        }
+    }
+
+    /**
+     * 同级下显示，先隐藏全部，再显示当前的
+     * @param fragment 内容
+     */
+    public void showFragment(BaseFragment fragment,int tag){
+        if (fragment == null){
+            throw new NullPointerException("fragment :" + null +" NullPointerException");
+        }
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction sTransaction = mFragmentManager.beginTransaction();
+        boolean sB_exist = false;
+        if (mSArray_fragment.size() > 0){
+            for (int i = 0; i < mSArray_fragment.size(); i++) {
+                Fragment sFragment = mSArray_fragment.valueAt(i);
+                if (sFragment.getClass().getSimpleName().equals(fragment.getClass().getSimpleName())){
+                    sB_exist = true;
+                    continue;
+                }
+                sTransaction.hide(sFragment);
+            }
+        }
+
+        if (!sB_exist){
+            sTransaction.add(getI_fragmentGroupLayoutId() == 0 ? mI_fragmentGroupLayoutId : getI_fragmentGroupLayoutId(), fragment);
+        }else {
+            sTransaction.show(fragment);
+        }
+
+        sTransaction.commit();
+        mSArray_fragment.put(tag,fragment);
+    }
+
     /**
      * 跳转页面
      *
@@ -201,32 +275,32 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     /**
      * 跳转容器页面
      *
-     * @param canonicalName 规范名 : Fragment.class.getCanonicalName()
+     * @param sPath
      */
-    public void startContainerActivity(String canonicalName) {
-        startContainerActivity(canonicalName, null);
+    public void startGeneralShowActivity(String sPath) {
+        startGeneralShowActivity(sPath, null);
     }
 
     /**
      * 跳转容器页面
      *
-     * @param canonicalName 规范名 : Fragment.class.getCanonicalName()
+     * @param sPath
      * @param bundle        跳转所携带的信息
      */
-    public void startContainerActivity(String canonicalName, Bundle bundle) {
-        Intent intent = new Intent(this, ContainerActivity.class);
-        intent.putExtra(ContainerActivity.FRAGMENT, canonicalName);
-        if (bundle != null) {
-            intent.putExtra(ContainerActivity.BUNDLE, bundle);
+    public void startGeneralShowActivity(String sPath, Bundle bundle) {
+        if (bundle == null){
+            startActivity(GeneralShowActivity.getNewIntent(this,sPath));
+        }else {
+            startActivity(GeneralShowActivity.getNewIntent(this,sPath,bundle));
         }
-        startActivity(intent);
     }
 
     /**
      * =====================================================================
      **/
+
     @Override
-    public void initParam() {
+    public void initParam(Bundle fragmentOfBundle, Intent activityIntent) {
 
     }
 
@@ -243,6 +317,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * @return BR的id
      */
     public abstract int initVariableId();
+
+    public int getI_fragmentGroupLayoutId(){
+        return 0;
+    }
 
     /**
      * 初始化ViewModel
