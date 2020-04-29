@@ -42,6 +42,9 @@ public class DefaultAdapter<Model extends PopMenuModel> extends BaseAdapter<Mode
 
     @Override
     protected void onBindVHExtended(final DefaultAdapter.ViewHolder holder, final int position) {
+        if (position == getItemCount()-1){
+            holder.mItemMenuDefaultBinding.commonIMDefaultWire.setVisibility(View.GONE);
+        }
         holder.notifyData(getItemModel(position));
         holder.mItemMenuDefaultBinding.setOnClick(new View.OnClickListener() {
             @Override

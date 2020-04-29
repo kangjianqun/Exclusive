@@ -52,24 +52,24 @@ public class ImageTextView extends ConstraintLayout implements View.OnClickListe
 
         if (attributeSet != null){
             @SuppressLint({"Recycle","CustomViewStyleable"})
-            TypedArray sTypedArray = context.obtainStyledAttributes(attributeSet,R.styleable.CommonImageTextView);
+            TypedArray sTypedArray = context.obtainStyledAttributes(attributeSet,R.styleable.ImageTextView);
             setViewParam(sTypedArray);
 //            sTypedArray.recycle();
         }
     }
 
     private void setViewParam(TypedArray sTypedArray){
-        String sS_txt = sTypedArray.getString(R.styleable.CommonImageTextView_commonITViewTxt);
-        int sI_txtColor = sTypedArray.getColor(R.styleable.CommonImageTextView_commonITViewTxtColor, Color.BLACK);
+        String sS_txt = sTypedArray.getString(R.styleable.ImageTextView_commonITViewTxt);
+        int sI_txtColor = sTypedArray.getColor(R.styleable.ImageTextView_commonITViewTxtColor, Color.BLACK);
 
-        int sI_signId = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSign, R.drawable.common_svg_star_black_24dp);
-        int sI_signBgId = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSignBg, R.drawable.common_svg_explode_effects_circle);
+        int sI_signId = sTypedArray.getResourceId(R.styleable.ImageTextView_commonITViewSign, R.drawable.common_svg_star_black_24dp);
+        int sI_signBgId = sTypedArray.getResourceId(R.styleable.ImageTextView_commonITViewSignBg, R.drawable.common_svg_explode_effects_circle);
 
-        int sI_signW = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSignW, 64);
-        int sI_signH = sTypedArray.getResourceId(R.styleable.CommonImageTextView_commonITViewSignH, 64);
+        int sI_signW = sTypedArray.getResourceId(R.styleable.ImageTextView_commonITViewSignW, 64);
+        int sI_signH = sTypedArray.getResourceId(R.styleable.ImageTextView_commonITViewSignH, 64);
 
-        int sI_padding = sTypedArray.getInteger(R.styleable.CommonImageTextView_commonITViewPadding, 0);
-        mS_direction = sTypedArray.getString(R.styleable.CommonImageTextView_commonITViewDirection);
+        int sI_padding = sTypedArray.getInteger(R.styleable.ImageTextView_commonITViewPadding, 0);
+        mS_direction = sTypedArray.getString(R.styleable.ImageTextView_commonITViewDirection);
 
 
         setRootPadding(sI_padding);
@@ -110,7 +110,7 @@ public class ImageTextView extends ConstraintLayout implements View.OnClickListe
             s_direction = TXT_BOTTOM;
         }
 
-        ConstraintLayout.LayoutParams sContainer = (LayoutParams) mIV_sign.getLayoutParams();
+        LayoutParams sContainer = (LayoutParams) mIV_sign.getLayoutParams();
         int sI_signId = mIV_sign.getId();
         switch (s_direction){
             case TXT_LEFT:
@@ -157,7 +157,7 @@ public class ImageTextView extends ConstraintLayout implements View.OnClickListe
      * @param h 高
      */
     public void setSignSize(int w,int h){
-        ConstraintLayout.LayoutParams sContainer = (LayoutParams) mIV_sign.getLayoutParams();
+        LayoutParams sContainer = (LayoutParams) mIV_sign.getLayoutParams();
         sContainer.height = ScreenSizeUtils.INSTANCE.dp2px(getContext(),h);
         sContainer.width = ScreenSizeUtils.INSTANCE.dp2px(getContext(),w);
         mIV_sign.setLayoutParams(sContainer);

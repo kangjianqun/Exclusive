@@ -1,6 +1,7 @@
 package com.kjq.common.utils;
 
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -14,23 +15,24 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.kjq.common.utils.data.Constant;
 import com.kjq.common.utils.data.StringUtils;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * <p>Utils初始化相关 </p>
  */
 public class Utils {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     private Utils() {
@@ -42,8 +44,9 @@ public class Utils {
      *
      * @param context 上下文
      */
-    public static void init(Context context) {
+    public static void init(@NotNull Context context) {
         Utils.context = context.getApplicationContext();
+        Constant.AppInfo.H = ScreenSizeUtils.INSTANCE.getDisplayH();
     }
 
     /**
@@ -64,7 +67,7 @@ public class Utils {
      */
     public static
     @NonNull
-    Activity getActivity(View view) {
+    Activity getActivity(@NotNull View view) {
         Context context = view.getContext();
 
         while (context instanceof ContextWrapper) {
@@ -83,6 +86,7 @@ public class Utils {
      * @param id 资源Id
      * @return String
      */
+    @NotNull
     public static String getString(@StringRes int id) {
         return context.getResources().getString(id);
     }
@@ -104,19 +108,7 @@ public class Utils {
         }
     }
 
-
-    /**
-     * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
-     * performed by the {@code fragmentManager}.
-     */
-    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
-                                             @NonNull Fragment fragment, int frameId) {
-        checkNotNull(fragment);
-        FragmentTransaction transaction = checkNotNull(fragmentManager).beginTransaction();
-        transaction.add(frameId, fragment);
-        transaction.commit();
-    }
-
+    @Contract("null -> fail; !null -> param1")
     public static <T> T checkNotNull(T obj) {
         if (obj == null) {
             throw new NullPointerException();
@@ -165,56 +157,13 @@ public class Utils {
      * @param context 上下文
      * @return 状态栏高度
      */
-    public static int getStatusBarHeight(Context context){
+    public static int getStatusBarHeight(@NotNull Context context){
         int result = 0;
         int resId = context.getResources().getIdentifier("status_bar_height","dimen","android");
         if(resId > 0){
             result = context.getResources().getDimensionPixelSize(resId);
         }
         return result;
-    }
-
-    /**
-     * 思路:直接设置状态栏的颜色
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarUpperAPI21(Activity activity) {
-        Window window = activity.getWindow();
-        //取消设置悬浮透明状态栏,ContentView便不会进入状态栏的下方了
-
-        //设置悬浮透明状态栏
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        //设置状态栏颜色
-//        window.setStatusBarColor(ContextCompat.getColor(activity,android.R.color.transparent));
-    }
-
-    /**
-     * 思路:设置状态栏悬浮透明，然后制造一个和状态栏等尺寸的View设置好颜色填进去，就好像是状态栏着色了一样
-     */
-    public static void setStatusBarUpperAPI19(Activity activity) {
-        Window window = activity.getWindow();
-        //设置悬浮透明状态栏
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        ViewGroup mContentView = activity.findViewById(Window.ID_ANDROID_CONTENT);
-        int statusBarHeight = getStatusBarHeight(activity);
-//        int statusColor = ContextCompat.getColor(activity,android.R.color.transparent);
-
-        View mTopView = mContentView.getChildAt(0);
-        if (mTopView != null && mTopView.getLayoutParams() != null &&
-                mTopView.getLayoutParams().height == statusBarHeight) {
-//            mTopView.setBackgroundColor(statusColor);
-            return;
-        }
-
-        //制造一个和状态栏等尺寸的 View
-        mTopView = new View(activity);
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
-//        mTopView.setBackgroundColor(statusColor);
-        //将view添加到第一个位置
-        mContentView.addView(mTopView, 0, lp);
     }
 
     /**

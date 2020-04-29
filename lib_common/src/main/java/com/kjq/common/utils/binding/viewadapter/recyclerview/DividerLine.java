@@ -3,18 +3,22 @@ package com.kjq.common.utils.binding.viewadapter.recyclerview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kjq.common.utils.ScreenSizeUtils;
+
 /**
- * Created by goldze on 2017/6/16.
+ * Created by 康建群 on 2017/6/16.
  */
 public class DividerLine extends RecyclerView.ItemDecoration {
     private static final String TAG = DividerLine.class.getCanonicalName();
-    //默认分隔线厚度为2dp
+    //默认分隔线厚度为1dp
     private static final int DEFAULT_DIVIDER_SIZE = 1;
     //控制分隔线的属性,值为一个drawable
     private static final int ATTRS[] = {android.R.attr.listDivider};
@@ -36,7 +40,8 @@ public class DividerLine extends RecyclerView.ItemDecoration {
         mContext = context;
         //获取样式中对应的属性值
         TypedArray attrArray = context.obtainStyledAttributes(ATTRS);
-        dividerDrawable = attrArray.getDrawable(0);
+//        dividerDrawable = attrArray.getDrawable(0);
+        dividerDrawable = new ColorDrawable(Color.parseColor("#f7f7f7"));
         attrArray.recycle();
     }
 
@@ -110,7 +115,7 @@ public class DividerLine extends RecyclerView.ItemDecoration {
             final int top = child.getTop() - params.topMargin;
             final int bottom = child.getBottom() + params.bottomMargin;
             final int left = child.getRight() + params.rightMargin;
-            final int right = getDividerSize() == 0 ? left + dip2px(mContext, DEFAULT_DIVIDER_SIZE) : left + getDividerSize();
+            final int right = getDividerSize() == 0 ? left + ScreenSizeUtils.INSTANCE.dip2px(DEFAULT_DIVIDER_SIZE) : left + getDividerSize();
             dividerDrawable.setBounds(left, top, right, bottom);
             dividerDrawable.draw(c);
         }
@@ -126,6 +131,9 @@ public class DividerLine extends RecyclerView.ItemDecoration {
     private void drawHorizontal(Canvas c, RecyclerView parent, RecyclerView.State state) {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
+            if (i == childCount -1){
+                return;
+            }
             //分别为每个item绘制分隔线,首先要计算出item的边缘在哪里,给分隔线定位,定界
             final View child = parent.getChildAt(i);
             //RecyclerView的LayoutManager继承自ViewGroup,支持了margin
@@ -137,7 +145,7 @@ public class DividerLine extends RecyclerView.ItemDecoration {
             //child的右边(也是分隔线的右边)
             final int right = child.getRight() - params.rightMargin;
             //分隔线的底边所在的位置(那就是分隔线的顶边加上分隔线的高度)
-            final int bottom = getDividerSize() == 0 ? top + dip2px(mContext, DEFAULT_DIVIDER_SIZE) : top + getDividerSize();
+            final int bottom = getDividerSize() == 0 ? top + ScreenSizeUtils.INSTANCE.dip2px(DEFAULT_DIVIDER_SIZE) : top + getDividerSize();
             dividerDrawable.setBounds(left, top, right, bottom);
             //画上去
             dividerDrawable.draw(c);
@@ -148,17 +156,5 @@ public class DividerLine extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 //        outRect.bottom = getDividerSize() == 0 ? dip2px(mContext, DEFAULT_DIVIDER_SIZE) : getDividerSize();
-    }
-
-    /**
-     * 将dip或dp值转换为px值，保证尺寸大小不变
-     *
-     * @param dipValue
-     * @param context（DisplayMetrics类中属性density）
-     * @return
-     */
-    public static int dip2px(Context context, float dipValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dipValue * scale + 0.5f);
     }
 }

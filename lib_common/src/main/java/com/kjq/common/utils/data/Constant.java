@@ -41,9 +41,7 @@ public class Constant {
         public static final String K_FIRST_ROOM = "firstRoom";
         public static final String K_SCENE_NAME = "sceneName";
         public static final String K_AIR_DATA_NAME = "airInfrared";
-        public static class Infrared{
-
-        }
+        public static final String TYPE_ACCOUNT = "TYPE_ACCOUNT";
     }
 
     public static class AppInfo{

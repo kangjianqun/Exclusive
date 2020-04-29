@@ -62,7 +62,6 @@ public final class ViewAdapter {
     @BindingAdapter({"onLoadMoreCommand"})
     public static void onLoadMoreCommand(final ListView listView, final BindingCommand<Integer> onLoadMoreCommand) {
         listView.setOnScrollListener(new OnScrollListener(listView, onLoadMoreCommand));
-
     }
 
     public static class OnScrollListener implements AbsListView.OnScrollListener {

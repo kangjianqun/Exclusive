@@ -1,10 +1,8 @@
 package com.kjq.common.utils.socket
 
-import android.content.Context
-
 
 import com.kjq.common.utils.Utils
-import com.kjq.common.utils.network.WIFIUtils
+import com.kjq.common.utils.network.wifi.WIFIUtils
 
 import java.io.IOException
 import java.net.DatagramPacket
@@ -13,7 +11,6 @@ import java.net.InetAddress
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 

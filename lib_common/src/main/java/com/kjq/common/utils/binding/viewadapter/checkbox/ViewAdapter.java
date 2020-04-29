@@ -22,7 +22,7 @@ public class ViewAdapter {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                bindingCommand.execute(b);
+                bindingCommand.execute(checkBox,b);
             }
         });
     }

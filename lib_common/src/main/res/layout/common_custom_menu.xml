@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
     android:id="@+id/cMenu_root"
     android:layout_width="match_parent"
     android:layout_height="48dp"
@@ -9,68 +11,143 @@
 
     <ImageView
         android:id="@+id/cMenu_left"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_gravity="center_vertical"
+        android:scaleType="centerInside"
         android:layout_marginStart="16dp"
+        tools:src="@drawable/common_png_ic_family_avatar"
         app:layout_constraintBottom_toBottomOf="@+id/cMenu_menuTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cMenu_menuTxt" />
 
     <TextView
         android:id="@+id/cMenu_menuTxt"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
+        android:layout_marginStart="8dp"
         android:gravity="center_vertical"
-        android:textSize="18sp"
+        android:textSize="15sp"
+        app:layout_goneMarginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/cMenu_left"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="文本内容" />
 
-
-    <ImageView
-        android:id="@+id/cMenu_right"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:visibility="gone"
-        android:id="@+id/designs_cMenu_switch_right"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/common_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="112dp" />
+
+    <EditText
+        android:id="@+id/common_cMenu_eT_content"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        tools:text="输入文本"
+        android:textSize="14sp"
+        android:padding="4dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/common_guideline"
+        app:layout_constraintEnd_toStartOf="@id/common_cMenu_cL_right"/>
+
+    <TextView
+        android:id="@+id/common_cMenu_tV_content"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        tools:text="文本内容"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/common_guideline"
+        app:layout_constraintEnd_toStartOf="@id/common_cMenu_cL_right"/>
 
     <TextView
         android:id="@+id/cMenu_secondaryTxt"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center|end"
+        app:layout_constraintStart_toEndOf="@id/cMenu_menuTxt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/common_cMenu_cL_right"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="文本内容"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/common_cMenu_tV_hintCount"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/common_shape_oval_primary"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/common_cMenu_cL_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        tools:text="1"
+        tools:ignore="SmallSp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/common_cMenu_cL_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_vertical"
-        android:textSize="10sp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cMenu_right"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="文本内容" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/cMenu_right"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="center"
+            tools:src="@drawable/common_svg_keyboard_arrow_right_black_24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Switch
+            android:id="@+id/designs_cMenu_switch_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/common_cMenu_rBtn"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
         android:id="@+id/cMenu_wire"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0.5dp"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="#EBEBEB"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="#F7F7F7"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/cMenu_menuTxt" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

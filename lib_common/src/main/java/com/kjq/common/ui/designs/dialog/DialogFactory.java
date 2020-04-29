@@ -14,6 +14,8 @@ import com.kjq.common.databinding.CommonDialogTimeSelectDefaultBinding;
 import com.kjq.common.ui.designs.dialog.litener.ViewEven;
 import com.kjq.common.ui.designs.dialog.model.RecyclerData;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 
 public class DialogFactory {
@@ -84,6 +86,17 @@ public class DialogFactory {
     }
 
     /**
+     * 自定义视图 背景透明
+     * @param context context
+     * @param layoutId 布局Id
+     * @param <Dialog> 继承DialogBase的基类
+     * @return 继承DialogBase的基类
+     */
+    public static <Dialog extends DialogBase> Dialog getDialogCViewTransparent(Context context, @LayoutRes int layoutId){
+        return getDialogCView(context,R.style.CommonDialog,layoutId,null);
+    }
+
+    /**
      * 自定义视图
      * @param context context
      * @param layoutId 布局Id
@@ -91,6 +104,7 @@ public class DialogFactory {
      * @param <Dialog> 继承DialogBase的基类
      * @return 继承DialogBase的基类
      */
+    @Contract(pure = true)
     public static <Dialog extends DialogBase> Dialog getDialogCView(Context context, @LayoutRes final int layoutId, final ViewEven viewEven){
         DialogCView sDialogCView ;
         sDialogCView = new DialogCView(context) {
@@ -115,14 +129,21 @@ public class DialogFactory {
      * @param <Dialog> 继承DialogBase的基类
      * @return 继承DialogBase的基类
      */
+    @Contract(pure = true)
     public static <Dialog extends DialogBase>Dialog getDialogCView
             (Context context, @StyleRes int styleId, @LayoutRes final int layoutId, final ViewEven viewEven){
-        DialogCView sDialogCView ;
-            sDialogCView = new DialogCView(context,styleId) {
+        DialogCView sDialogCView = new DialogCView(context,styleId) {
                 @Override
                 public void setEven(View view) {
-                    viewEven.setViewEven(view);
+                    if (viewEven == null){
+                        if (getViewEven() != null){
+                            getViewEven().setViewEven(view);
+                        }
+                    }else {
+                        viewEven.setViewEven(view);
+                    }
                 }
+                @Contract(pure = true)
                 @Override
                 protected int getLayoutResId() {
                     return layoutId;

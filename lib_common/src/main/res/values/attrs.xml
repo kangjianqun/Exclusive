@@ -36,7 +36,6 @@
         <attr name="onTouchCommand" />
         <attr name="isThrottleFirst" />
         <attr name="currentView" />
-
     </declare-styleable>
 
     <declare-styleable name="AdapterView" tools:ignore="ResourceName">
@@ -66,7 +65,6 @@
         <attr name="afterTextChangedCommand" format="reference" />
         <attr name="textChanged" format="reference" />
     </declare-styleable>
-
 
     <declare-styleable name="ImageView" tools:ignore="ResourceName">
         <!--  load bitmap from uri(string type) -->
@@ -164,12 +162,181 @@
         <attr name="render" format="string" />
     </declare-styleable>
 
-    <!-- 自定义控制事件分发的LinearLayout -->
-    <declare-styleable name="ControlDistributeLinearLayout" tools:ignore="ResourceName">
-        <attr name="distribute_event" format="boolean" />
+    <attr name="commonDrawableSize" format="dimension"/><!--图片尺寸-->
+    <attr name="commonDrawableArrowSize" format="dimension"/><!--箭头图片尺寸-->
+    <attr name="commonDrawableProgressSize" format="dimension"/><!--箭头图片尺寸-->
+    <attr name="commonDrawableMarginRight" format="dimension"/><!--图片和文字的间距-->
+    <attr name="commonTextSizeTitle" format="dimension"/><!--标题字体-->
+    <attr name="commonTextSizeTime" format="dimension"/><!--时间字体-->
+    <attr name="commonFinishDuration" format="integer"/><!--完成时停留时间-->
+    <attr name="commonPrimaryColor" format="color|reference"/><!--主要颜色-->
+    <attr name="commonAccentColor" format="color|reference"/><!--强调颜色-->
+    <attr name="commonDrawableArrow" format="reference"/><!--箭头图片-->
+    <attr name="commonDrawableProgress" format="reference"/><!--转动图片-->
+    <attr name="commonEnableHorizontalDrag" format="boolean"/><!--支持水平拖动-->
+
+    <attr name="commonActivated" format="boolean|reference"/>  <!-- 设置激活 -->
+
+    <attr name="commonDrawable" format="reference"/>
+    <attr name="commonBitmap" format="reference"/>
+
+    <attr name="commonTextPulling" format="string"/>
+    <attr name="commonTextLoading" format="string"/>
+    <attr name="commonTextRelease" format="string"/>
+    <attr name="commonTextFinish" format="string"/>
+    <attr name="commonTextFailed" format="string"/>
+    <attr name="commonTextUpdate" format="string"/>
+    <attr name="commonTextSecondary" format="string"/>
+    <attr name="commonTextRefreshing" format="string"/>
+
+    <attr name="commonTextNothing" format="string" />
+
+    <attr name="commonText" format="integer|string|reference"/>
+    <attr name="commonTextSize" format="reference"/>
+    <attr name="commonTextColor" format="integer|color|reference"/>
+    <attr name="commonColor" format="integer|color|reference"/>
+    <attr name="commonSrc" format="reference"/>
+    <attr name="commonHint" format="string|reference"/>
+    <attr name="commonHintCount" format="integer"/>
+
+    <attr name="commonEditTextNotInput" format="integer"/>
+
+    <attr name="commonClassicsSpinnerStyle" format="enum">
+        <enum name="Translate" value="0"/><!--平行移动-->
+        <enum name="Scale" value="1"/><!--拉伸形变-->
+        <enum name="FixedBehind" value="2"/><!--固定在背后-->
+    </attr>
+
+    <attr name="commonSpinnerStyle" format="enum">
+        <enum name="Translate" value="0"/><!--平行移动-->
+        <enum name="Scale" value="1"/><!--拉伸形变-->
+        <enum name="FixedBehind" value="2"/><!--固定在背后-->
+        <enum name="FixedFront" value="3"/><!--固定在前面-->
+        <enum name="MatchLayout" value="4"/><!--填满布局-->
+    </attr>
+
+    <declare-styleable name="SmartRefreshLayout" tools:ignore="ResourceName">
+        <attr name="commonPrimaryColor"/>
+        <attr name="commonAccentColor"/>
+        <attr name="commonReboundDuration" format="integer"/>
+        <attr name="commonHeaderHeight" format="dimension"/>
+        <attr name="commonFooterHeight" format="dimension"/>
+        <attr name="commonHeaderInsetStart" format="dimension"/>
+        <attr name="commonFooterInsetStart" format="dimension"/>
+        <attr name="commonDragRate" format="float"/>
+        <attr name="commonHeaderMaxDragRate" format="float"/>
+        <attr name="commonFooterMaxDragRate" format="float"/>
+        <attr name="commonHeaderTriggerRate" format="float"/>
+        <attr name="commonFooterTriggerRate" format="float"/>
+        <attr name="commonEnableRefresh" format="boolean"/>
+        <attr name="commonEnableLoadMore" format="boolean"/>
+        <attr name="commonEnableHeaderTranslationContent" format="boolean"/>
+        <attr name="commonEnableFooterTranslationContent" format="boolean"/>
+        <attr name="commonHeaderTranslationViewId" format="reference"/>
+        <attr name="commonFooterTranslationViewId" format="reference"/>
+        <attr name="commonEnablePreviewInEditMode" format="boolean"/>
+        <attr name="commonEnableAutoLoadMore" format="boolean"/>
+        <attr name="commonEnableOverScrollBounce" format="boolean"/>
+        <attr name="commonEnablePureScrollMode" format="boolean"/>
+        <attr name="commonEnableNestedScrolling" format="boolean"/>
+        <attr name="commonEnableScrollContentWhenLoaded" format="boolean"/>
+        <attr name="commonEnableScrollContentWhenRefreshed" format="boolean"/>
+        <attr name="commonEnableLoadMoreWhenContentNotFull" format="boolean"/>
+        <attr name="commonEnableFooterFollowWhenLoadFinished" format="boolean"/>
+        <attr name="commonEnableFooterFollowWhenNoMoreData" format="boolean"/>
+        <attr name="commonEnableClipHeaderWhenFixedBehind" format="boolean"/>
+        <attr name="commonEnableClipFooterWhenFixedBehind" format="boolean"/>
+        <attr name="commonEnableOverScrollDrag" format="boolean"/>
+        <!--<attr name="srlEnableNestedScrollingOnly" format="boolean"/>-->
+        <attr name="commonDisableContentWhenRefresh" format="boolean"/>
+        <attr name="commonDisableContentWhenLoading" format="boolean"/>
+        <attr name="commonFixedHeaderViewId" format="reference"/>
+        <attr name="commonFixedFooterViewId" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="CommonImageTextView">
+    <declare-styleable name="SmartRefreshLayout_Layout" tools:ignore="ResourceName">
+        <attr name="commonSpinnerStyle"/>
+        <attr name="commonBackgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="BezierRadarHeader" tools:ignore="ResourceName">
+        <attr name="commonPrimaryColor"/>
+        <attr name="commonAccentColor"/>
+        <attr name="commonEnableHorizontalDrag"/>
+    </declare-styleable>
+
+    <declare-styleable name="BallPulseFooter" tools:ignore="ResourceName">
+        <attr name="commonClassicsSpinnerStyle"/>
+        <attr name="commonAnimatingColor" format="color"/>
+        <attr name="commonNormalColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClassicsHeader" tools:ignore="ResourceName">
+        <attr name="commonClassicsSpinnerStyle"/>
+        <attr name="commonPrimaryColor"/>
+        <attr name="commonAccentColor"/>
+        <attr name="commonFinishDuration"/>
+        <attr name="commonDrawableArrow"/>
+        <attr name="commonDrawableProgress"/>
+        <attr name="commonDrawableMarginRight"/>
+        <attr name="commonDrawableSize"/>
+        <attr name="commonDrawableArrowSize"/>
+        <attr name="commonDrawableProgressSize"/>
+        <attr name="commonTextSizeTitle"/>
+        <attr name="commonTextSizeTime"/>
+        <attr name="commonTextTimeMarginTop" format="dimension"/>
+        <attr name="commonEnableLastTime" format="boolean"/>
+
+        <attr name="commonTextPulling"/>
+        <attr name="commonTextLoading"/>
+        <attr name="commonTextRelease"/>
+        <attr name="commonTextFinish"/>
+        <attr name="commonTextFailed"/>
+        <attr name="commonTextUpdate"/>
+        <attr name="commonTextSecondary"/>
+        <attr name="commonTextRefreshing"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="ClassicsFooter" tools:ignore="ResourceName">
+        <attr name="commonClassicsSpinnerStyle"/>
+        <attr name="commonPrimaryColor"/>
+        <attr name="commonAccentColor"/>
+        <attr name="commonFinishDuration"/>
+        <attr name="commonTextSizeTitle"/>
+        <attr name="commonDrawableArrow"/>
+        <attr name="commonDrawableProgress"/>
+        <attr name="commonDrawableMarginRight"/>
+        <attr name="commonDrawableSize"/>
+        <attr name="commonDrawableArrowSize"/>
+        <attr name="commonDrawableProgressSize"/>
+
+        <attr name="commonTextPulling"/>
+        <attr name="commonTextRelease"/>
+        <attr name="commonTextLoading"/>
+        <attr name="commonTextRefreshing"/>
+        <attr name="commonTextFinish"/>
+        <attr name="commonTextFailed"/>
+        <attr name="commonTextNothing"/>
+    </declare-styleable>
+
+    <declare-styleable name="TwoLevelHeader" tools:ignore="ResourceName">
+        <attr name="commonMaxRage" format="float"/>
+        <attr name="commonFloorRage" format="float"/>
+        <attr name="commonRefreshRage" format="float"/>
+        <attr name="commonFloorDuration" format="integer"/>
+        <attr name="commonEnableTwoLevel" format="boolean"/>
+        <attr name="commonEnablePullToCloseTwoLevel" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="WaterDropletsHeader" tools:ignore="ResourceName">
+        <attr name="commonPrimaryColor" />
+        <attr name="commonAccentColor"/>
+        <attr name="commonShadowColor" format="color|reference" />
+        <attr name="commonShadowRadius" format="dimension|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ImageTextView" tools:ignore="ResourceName">
         <attr name="commonITViewSign" format="reference"/>
         <attr name="commonITViewSignH" format="reference"/>
         <attr name="commonITViewSignW" format="reference"/>
@@ -185,56 +352,76 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="CommonLinearLayoutExtend">
+    <declare-styleable name="LinearLayoutExtend" tools:ignore="ResourceName">
         <attr name="commonLLExtendMaxHeight" format="reference|integer"/>
     </declare-styleable>
 
-    <declare-styleable name="CommonRecycleViewExtend">
+    <declare-styleable name="RecycleViewExtend" tools:ignore="ResourceName">
         <attr name="commonRVExtendMaxHeight" format="reference|integer"/>
     </declare-styleable>
 
-    <declare-styleable name="CommonSingleSet">
-        <attr name="commonSSetTxt" format="reference|string"/>
-        <attr name="commonSSetTxtColor" format="reference|color"/>
-        <attr name="commonSSetSecondaryTxt" format="reference|string"/>
-        <attr name="commonSSetSecondaryTxtColor" format="reference|color"/>
-        <attr name="commonSSetRightStyle" format="enum">
-            <enum name="img" value="0"/>
-            <enum name="onOff" value="1"/>
-            <enum name="txt" value="2"/>
-        </attr>
+    <declare-styleable name="SearchViewExtend" tools:ignore="ResourceName">
+        <attr name="commonSrc"/>
+        <attr name="commonCloseIcon" format="reference"/>
+        <attr name="commonHint"/>
     </declare-styleable>
 
-    <declare-styleable name="CommonSwitchingFigureView">
+    <declare-styleable name="SwitchingFigureView" tools:ignore="ResourceName">
         <attr name="commonDSFSparseArrayMethod" format="reference|string"/>
         <attr name="commonDSFSparseArrayMethodClassName" format="reference|string"/>
     </declare-styleable>
 
-
     <!--自定义单行菜单属性-->
-    <declare-styleable name="CommonCustomMenu">
+    <declare-styleable name="CustomMenu" tools:ignore="ResourceName">
         <attr name="commonIsLeft" format="boolean"/>
         <attr name="commonLeftID" format="reference"/>
+        <attr name="commonText"/>
+        <attr name="commonHint" />
+        <attr name="commonHintCount"/>
         <attr name="commonMenuTxt" format="string"/>
         <attr name="commonMenuTxtSize" format="integer|reference"/>
         <attr name="commonMenuTxtColor" format="color|reference"/>
         <attr name="commonSecondaryTxt" format="string"/>
-        <attr name="commonIsRight" format="boolean"/>
-        <attr name="commonRightID" format="reference"/>
+        <attr name="commonIsTxt" format="enum">
+            <enum name="textView" value="1"/>
+            <enum name="editText" value="2"/>
+        </attr>
+        <attr name="commonInputType" />
+        <attr name="commonMaxLines" format="integer"/>
+        <attr name="commonMaxLength" format="integer"/>
         <attr name="commonIsWire" format="boolean"/>
-        <attr name="commonIsSwitch" format="boolean"/>
-        <attr name="commonSwitchStyle" format="reference"/>
+
+        <attr name="commonIsRight" format="enum">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+            <enum name="gone" value="2"/>
+        </attr>
+        <attr name="commonRightType" format="enum">
+            <enum name="eImg" value="0"/>
+            <enum name="eSwitch" value="1"/>
+            <enum name="eRadio" value="2"/>
+        </attr>
+        <attr name="commonRadioIsButton" format="reference"/>
+        <attr name="commonRightID" format="reference"/>
+        <attr name="commonSwitchTrack" format="reference"/>
+        <attr name="commonSwitchThumb" format="reference"/>
+        <attr name="commonSwitchState" format="boolean"/>
+        <attr name="commonRadioState" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextViewExtend" tools:ignore="ResourceName">
+        <attr name="commonText" />
     </declare-styleable>
 
     <!--item侧滑删除属性-->
-
-    <declare-styleable name="CommonItemMenuLayout">
+    <declare-styleable name="ItemMenuLayout" tools:ignore="ResourceName">
         <attr name="commonSwipeEnable" format="boolean"/>
         <attr name="commonIos" format="boolean"/>
         <attr name="commonLeftSwipe" format="boolean"/>
+        <attr name="commonClose" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="CommonSeekArc">
+    <declare-styleable name="SeekArc" tools:ignore="ResourceName">
         <attr name="commonThumb" format="reference" />
         <attr name="commonThumbOffset" format="dimension" />
         <attr name="commonMax" format="integer" />
@@ -252,7 +439,46 @@
         <attr name="commonEnabled" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="CommonSeekArcTheme">
+    <declare-styleable name="SeekArcTheme" tools:ignore="ResourceName">
         <attr name="commonSeekArcStyle" format="reference"/>
     </declare-styleable>
+    <declare-styleable name="HeadPortraitView" tools:ignore="ResourceName">
+        <attr name="commonText" />
+        <attr name="commonSrc" />
+        <attr name="commonTextVisibility" format="enum">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+            <enum name="gone" value="2"/>
+        </attr>
+        <attr name="commonImgArray" format="reference"/>
+        <attr name="commonTextShadow" format="color|reference"/>
+        <attr name="commonTextShadowH" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="NineGridImageView" tools:ignore="ResourceName">
+        <attr name="commonImgGap" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="ClipImageView" tools:ignore="ResourceName">
+        <attr name="commonBoxHeight" format="integer"/>
+        <attr name="commonBoxWidth" format="integer"/>
+        <attr name="commonTipText" format="string" />
+        <attr name="commonTipTextSize" format="dimension" />
+        <attr name="commonMaskColor" format="color" />
+        <attr name="commonClipPadding" format="dimension" />
+        <attr name="commonClipRoundCorner" format="dimension|reference" />
+        <attr name="commonClipCircle" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="WheelView" tools:ignore="ResourceName">
+        <attr name="commonGravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="commonTextSize"/>
+        <attr name="commonTextColorOut" format="color"/>
+        <attr name="commonTextColorCenter" format="color"/>
+        <attr name="commonDividerColor" format="color"/>
+        <attr name="commonLineSpacingMultiplier" format="float"/>
+    </declare-styleable>
+
 </resources>

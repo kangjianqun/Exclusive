@@ -11,6 +11,7 @@ public class BindingCommand<T> {
     private BindingAction execute;
     private BindingConsumer<T> consumer;
     private BindingFunction<Boolean> canExecute0;
+    private BindingViewConsumer<T> mBindingViewConsumer;
 
     public BindingCommand(BindingAction execute) {
         this.execute = execute;
@@ -21,6 +22,10 @@ public class BindingCommand<T> {
      */
     public BindingCommand(BindingConsumer<T> execute) {
         this.consumer = execute;
+    }
+
+    public BindingCommand(BindingViewConsumer<T> bindingViewConsumer){
+        this.mBindingViewConsumer = bindingViewConsumer;
     }
 
     /**
@@ -56,14 +61,20 @@ public class BindingCommand<T> {
 //        }
 //    }
 
+    public void execute(T parameter){
+        if (consumer != null && canExecute0()){
+            consumer.call(parameter);
+        }
+    }
+
     /**
      * 执行带泛型参数的命令
      *
      * @param parameter 泛型参数
      */
-    public void execute(T parameter) {
-        if (consumer != null && canExecute0()) {
-            consumer.call(parameter);
+    public void execute(View view,T parameter) {
+        if (mBindingViewConsumer != null && canExecute0()) {
+            mBindingViewConsumer.call(view,parameter);
         }
     }
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
@@ -14,7 +16,7 @@ public class ReceiverUtil extends BroadcastReceiver {
     private Context mContext;
     IntentFilter sIntentFilter = new IntentFilter();
 
-    public ReceiverUtil(Context context, List<String> strings,IReceiverListener listener) {
+    public ReceiverUtil(Context context, @NotNull List<String> strings, IReceiverListener listener) {
         mReceiverListener = listener;
         mContext = context;
         for (String sS_action :

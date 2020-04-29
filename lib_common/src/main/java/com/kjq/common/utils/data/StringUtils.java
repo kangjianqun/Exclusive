@@ -1,5 +1,13 @@
 package com.kjq.common.utils.data;
 
+import androidx.annotation.StringRes;
+
+import com.kjq.common.utils.Utils;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+
 /**
  * 字符串相关工具类
  */
@@ -7,6 +15,24 @@ public class StringUtils {
 
     private StringUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+    //数字位
+    public static String[] chnNumChar = {"零","一","二","三","四","五","六","七","八","九"};
+    public static char[] chnNumChinese = {'零','一','二','三','四','五','六','七','八','九'};
+    //节权位
+    public static String[] chnUnitSection = {"","万","亿","万亿"};
+    //权位
+    public static String[] chnUnitChar = {"","十","百","千"};
+    public static HashMap intList = new HashMap();
+    static{
+        for(int i=0;i<chnNumChar.length;i++){
+            intList.put(chnNumChinese[i], i);
+        }
+
+        intList.put('十',10);
+        intList.put('百',100);
+        intList.put('千', 1000);
     }
 
     /**
@@ -23,6 +49,7 @@ public class StringUtils {
     /**
      * 字符串拼接,线程不安全,效率高
      */
+    @NotNull
     public static String builder(String... array) {
         StringBuilder s = new StringBuilder();
         for (String str : array) {
@@ -31,6 +58,89 @@ public class StringUtils {
         return s.toString();
     }
 
+    @NotNull
+    public static String dynamicJoint(@StringRes int stringRes, Object... content){
+        return dynamicJoint(Utils.getContext().getResources().getString(stringRes), content);
+    }
+
+    @NotNull
+    public static String dynamicJoint(String string, Object... content){
+        return format(string, content);
+    }
+
+    @NotNull
+    private static String format(String s, Object... objects){
+        if (objects != null){
+            if (objects[0] instanceof String){
+                String sS = (String) objects[0];
+                if (isEmpty(sS)){
+                    return "";
+                }
+                return String.format(s,objects);
+            }else {
+                return String.format(s,objects);
+            }
+        }else {
+            return "";
+        }
+    }
+
+    public static String numberToChinese(int num){
+        if(num == 0){
+            return "零";
+        }
+        int unitPos = 0;//节权位标识
+        StringBuilder All = new StringBuilder();
+        String chineseNum = "";//中文数字字符串
+        boolean needZero = false;//下一小结是否需要补零
+        String strIns;
+        while(num>0){
+            int section = num % 10000;//取最后面的那一个小节
+            if(needZero){//判断上一小节千位是否为零，为零就要加上零
+                All.insert(0, chnNumChar[0]);
+            }
+            chineseNum = sectionTOChinese(section,chineseNum);//处理当前小节的数字,然后用chineseNum记录当前小节数字
+            if( section!=0 ){//此处用if else 选择语句来执行加节权位
+                strIns = chnUnitSection[unitPos];//当小节不为0，就加上节权位
+                chineseNum = chineseNum + strIns;
+            }else{
+                strIns = chnUnitSection[0];//否则不用加
+                chineseNum = strIns + chineseNum;
+            }
+            All.insert(0, chineseNum);
+            chineseNum = "";
+            needZero = (section<1000) && (section>0);
+            num = num/10000;
+            unitPos++;
+        }
+        return All.toString();
+    }
+
+    private static String sectionTOChinese(int section, String chineseNum) {
+        String setionChinese = "";//小节部分用独立函数操作
+        int unitPos = 0;//小节内部的权值计数器
+        boolean zero = true;//小节内部的制零判断，每个小节内只能出现一个零
+        StringBuilder chineseNumBuilder = new StringBuilder(chineseNum);
+        while (section > 0) {
+            int v = section % 10;//取当前最末位的值
+            if (v == 0) {
+                if (!zero) {
+                    zero = true;//需要补零的操作，确保对连续多个零只是输出一个
+                    chineseNumBuilder.insert(0, chnNumChar[0]);
+                }
+            } else {
+                zero = false;//有非零的数字，就把制零开关打开
+                setionChinese = chnNumChar[v];//对应中文数字位
+                setionChinese = setionChinese + chnUnitChar[unitPos];//对应中文权位
+                chineseNumBuilder.insert(0, setionChinese);
+            }
+            unitPos++;
+            section = section / 10;
+        }
+        chineseNum = chineseNumBuilder.toString();
+
+        return chineseNum;
+    }
 
     /**
      * 判断字符串是否为null或长度为0
@@ -39,7 +149,7 @@ public class StringUtils {
      * @return {@code true}: 空<br> {@code false}: 不为空
      */
     public static boolean isEmpty(CharSequence s) {
-        return s == null || s.length() == 0;
+        return s == null || s.equals("") || s.length() == 0;
     }
 
     /**
@@ -188,5 +298,24 @@ public class StringUtils {
             }
         }
         return new String(chars);
+    }
+
+    public static String subRangeString(String body,String str1,String str2) {
+        while (true) {
+            int index1 = body.indexOf(str1);
+            if (index1 != -1) {
+                int index2 = body.indexOf(str2, index1);
+                if (index2 != -1) {
+//                    Log.e("Tag", "下标1为：" + index1 + "  下标2为:" + index2);
+                    String str3 = body.substring(0, index1) + body.substring(index2 + str2.length(), body.length());
+//                    Log.e("Tag", "str3为：" + str3);
+                    body = str3;
+                }else {
+                    return body;
+                }
+            }else {
+                return body;
+            }
+        }
     }
 }

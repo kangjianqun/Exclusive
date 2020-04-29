@@ -1,8 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kjq.common" >
+    package="com.kjq.common">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application>
-        <activity android:name=".base.mvvm.base.GeneralShowActivity" />
+        <activity android:name=".ui.activity.share.ShareActivity"/>
+        <activity android:name=".ui.activity.clip.ClipImageActivity"/>
+        <activity android:name=".ui.activity.scan.ScanActivity" />
+        <activity android:name=".base.mvvm.base.BaseGeneralShowActivity" />
     </application>
+
 </manifest>

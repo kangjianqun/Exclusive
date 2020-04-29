@@ -10,5 +10,5 @@ public interface ISelectListener {
      * @param item     被选择的菜单项.
      * @param position 被选择的位置.
      */
-    public void selected(View view, PopMenuModel item, int position);
+    void selected(View view, PopMenuModel item, int position);
 }

@@ -16,7 +16,12 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import androidx.databinding.InverseBindingMethod;
+import androidx.databinding.InverseBindingMethods;
+import androidx.databinding.ObservableBoolean;
+
 import com.kjq.common.R;
+import com.kjq.common.ui.designs.CustomMenu;
 
 
 /**
@@ -52,9 +57,11 @@ import com.kjq.common.R;
  * Date: 16/04/24
  * Created by Administrator on 2017/11/29 0029.
  */
-
+@InverseBindingMethods(
+        {@InverseBindingMethod(type = ItemMenuLayout.class, attribute = "commonClose", event = "commonCloseChanged"),
+        @InverseBindingMethod(type = ItemMenuLayout.class, attribute = "commonSwipeEnable", event = "commonSwipeEnableChanged")
+        })
 public class ItemMenuLayout extends ViewGroup {
-
     private int mScaleTouchSlop;//为了处理单击事件的冲突
     private int mMaxVelocity;//计算滑动速度用
     private int mPointerId;//多点触摸只算第一根手指的速度
@@ -181,16 +188,16 @@ public class ItemMenuLayout extends ViewGroup {
         isIos = true;
         //左滑右滑的开关,默认左滑打开菜单
         isLeftSwipe = true;
-        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CommonItemMenuLayout, defStyleAttr, 0);
+        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ItemMenuLayout, defStyleAttr, 0);
         int count = ta.getIndexCount();
         for (int i = 0; i < count; i++) {
             int attr = ta.getIndex(i);
             //如果引用成AndroidLib 资源都不是常量，无法使用switch case
-            if (attr == R.styleable.CommonItemMenuLayout_commonSwipeEnable) {
+            if (attr == R.styleable.ItemMenuLayout_commonSwipeEnable) {
                 isSwipeEnable = ta.getBoolean(attr, true);
-            } else if (attr == R.styleable.CommonItemMenuLayout_commonIos) {
+            } else if (attr == R.styleable.ItemMenuLayout_commonIos) {
                 isIos = ta.getBoolean(attr, true);
-            } else if (attr == R.styleable.CommonItemMenuLayout_commonLeftSwipe) {
+            } else if (attr == R.styleable.ItemMenuLayout_commonLeftSwipe) {
                 isLeftSwipe = ta.getBoolean(attr, true);
             }
         }
@@ -441,12 +448,9 @@ public class ItemMenuLayout extends ViewGroup {
                 // fix 长按事件和侧滑的冲突。
                 case MotionEvent.ACTION_MOVE:
                     //屏蔽滑动时的事件
-                    if (Math.abs(ev.getRawX() - mFirstP.x) > mScaleTouchSlop) {
+                        if (Math.abs(ev.getRawX() - mFirstP.x) > mScaleTouchSlop) {
                         return true;
                     }
-//                    else {
-//                        return true;
-//                    }
                     break;
                 //add by zhangxutong 2016 11 04 end
                 case MotionEvent.ACTION_UP:
@@ -620,6 +624,18 @@ public class ItemMenuLayout extends ViewGroup {
             return false;
         }
         return super.performLongClick();
+    }
+
+    public void setCommonClose(long time){
+        quickClose();
+    }
+
+    public void setCommonSwipeEnable(boolean swipeEnable){
+        setSwipeEnable(swipeEnable);
+    }
+
+    public void setCommonSwipeEnable(ObservableBoolean swipeEnable){
+        setSwipeEnable(swipeEnable.get());
     }
 
     /**

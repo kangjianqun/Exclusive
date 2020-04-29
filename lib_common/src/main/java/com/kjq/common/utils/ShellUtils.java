@@ -1,7 +1,7 @@
 package com.kjq.common.utils;
 
 
-import com.kjq.common.utils.application.CloseUtils;
+import com.kjq.common.utils.data.CloseUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

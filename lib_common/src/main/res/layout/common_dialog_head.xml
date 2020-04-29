@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="headUrl"
+            type="String" />
+        <variable
+            name="click"
+            type="com.kjq.common.utils.binding.command.BindingCommand" />
+    </data>
+    <LinearLayout
+        android:id="@+id/common_dHead_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/common_dHead_closeTop"
+            android:layout_width="360dp"
+            android:layout_height="100dp"
+            app:onClickCommand="@{click}"/>
+
+        <com.kjq.common.ui.designs.HeadPortraitView
+            android:id="@+id/common_dHead_head"
+            android:layout_width="360dp"
+            android:layout_height="360dp"
+            app:commonSrc="@{headUrl}"
+            app:commonText="@{0}"/>
+
+        <View
+            android:id="@+id/common_dHead_closeBottom"
+            android:layout_width="360dp"
+            android:layout_height="100dp"
+            app:onClickCommand="@{click}"/>
+    </LinearLayout>
+</layout>

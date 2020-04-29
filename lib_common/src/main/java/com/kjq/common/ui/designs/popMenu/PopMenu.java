@@ -3,6 +3,8 @@ package com.kjq.common.ui.designs.popMenu;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public abstract class PopMenu<Model extends PopMenuModel> {
+    private final View mView;
     private Activity mActivity;
 
     private ArrayList<Model> mAL_model;
 
     private BaseAdapter mBaseAdapter;
+
+    private Drawable mD_BackgroundDrawable = new ColorDrawable(0x00000000);
 
     /**
      * 菜单选择监听.
@@ -36,10 +41,10 @@ public abstract class PopMenu<Model extends PopMenuModel> {
     public PopMenu(Activity activity){
         mActivity = activity;
         mAL_model = new ArrayList<>();
-        View view = onCreateView(activity);
-        view.setFocusableInTouchMode(true);
+        mView = onCreateView(activity);
+        mView.setFocusableInTouchMode(true);
         mBaseAdapter = onCreateAdapter(activity,mAL_model);
-        mRecyclerView = findById(view);
+        mRecyclerView = findById(mView);
         mRecyclerView.setAdapter(mBaseAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mBaseAdapter.setISelectListener(new ISelectListener() {
@@ -51,7 +56,7 @@ public abstract class PopMenu<Model extends PopMenuModel> {
             }
         });
 
-        view.setOnKeyListener(new View.OnKeyListener() {
+        mView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_MENU && mPopupWindow.isShowing()) {
@@ -61,8 +66,9 @@ public abstract class PopMenu<Model extends PopMenuModel> {
                 return false;
             }
         });
-        mPopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
+
+        mPopupWindow = new PopupWindow(mView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow.setBackgroundDrawable(mD_BackgroundDrawable);
         mPopupWindow.setFocusable(true);
         mPopupWindow.setTouchable(true);
         mPopupWindow.setOutsideTouchable(true);
@@ -94,10 +100,22 @@ public abstract class PopMenu<Model extends PopMenuModel> {
 
     /**
      * 添加菜单项.
-     *
      */
     private void addItemNotify(Model model) {
-        mAL_model.add(model);
+        addItemNotify(mAL_model.size(),model,false);
+    }
+
+    public void addItemNotify(int position,Model model,boolean isCover){
+        if (isCover){
+            int sI_index =  mAL_model.indexOf(model);
+            if (sI_index < 0){
+                mAL_model.add(position,model);
+            }else {
+                mAL_model.set(sI_index,model);
+            }
+        }else {
+            mAL_model.add(position,model);
+        }
         mBaseAdapter.notifyDataSetChanged();
     }
 
@@ -109,6 +127,11 @@ public abstract class PopMenu<Model extends PopMenuModel> {
         addItemNotify(model);
     }
 
+    public void removeItem(Model model){
+        mAL_model.remove(model);
+        mBaseAdapter.notifyDataSetChanged();
+    }
+
     /**
      * 作为指定View的下拉控制显示.
      *
@@ -116,6 +139,11 @@ public abstract class PopMenu<Model extends PopMenuModel> {
      */
     public void showAsDropDown(View parent) {
         mPopupWindow.showAsDropDown(parent);
+        backgroundAlpha(0.7f);
+    }
+
+    public void showAsDropDown(View view,int xOff,int yOff){
+        mPopupWindow.showAsDropDown(view, xOff, yOff);
         backgroundAlpha(0.7f);
     }
 
@@ -134,6 +162,20 @@ public abstract class PopMenu<Model extends PopMenuModel> {
         WindowManager.LayoutParams lp = mActivity.getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         mActivity.getWindow().setAttributes(lp);
+    }
+
+    public Drawable getD_BackgroundDrawable() {
+        return mD_BackgroundDrawable;
+    }
+
+    public void setD_BackgroundDrawable(Drawable d_BackgroundDrawable) {
+        mPopupWindow.setBackgroundDrawable(d_BackgroundDrawable);
+    }
+
+    public int getWidth(){
+
+        mView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        return mView.getMeasuredWidth();
     }
 
     /**

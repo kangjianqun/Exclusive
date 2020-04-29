@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AlertDialog;
 
+import com.kjq.common.R;
 import com.kjq.common.ui.designs.dialog.litener.ViewEven;
 
 
@@ -19,6 +21,7 @@ public abstract class DialogBase implements IDialog{
     private int mI_layoutResId;
     private AlertDialog.Builder mBuilder;
     private String mS_titleTxt;
+    private int mI_titleTxtColor = R.color.common_black;
     private String mS_txt;
     private ViewEven mViewEven;
 
@@ -50,6 +53,11 @@ public abstract class DialogBase implements IDialog{
 
     public View getView() {
         return mView;
+    }
+
+    @Override
+    public void setBack() {
+        mB_isBack = false;
     }
 
     /**
@@ -147,7 +155,24 @@ public abstract class DialogBase implements IDialog{
     }
 
     @Override
+    public void setTitleTxt(String msg, int colorRes) {
+        mS_titleTxt = msg;
+        mI_titleTxtColor = colorRes;
+    }
+
+    @Override
     public void setTitleTxt(String msg) {
         mS_titleTxt = msg;
+    }
+
+    @Override
+    public void setLayoutParams(WindowManager.LayoutParams layoutParams) {
+        mAlertDialog.getWindow().setAttributes(layoutParams);
+        mAlertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    }
+
+    @Override
+    public WindowManager.LayoutParams getLayoutParams() {
+        return mAlertDialog.getWindow().getAttributes();
     }
 }

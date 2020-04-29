@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -16,6 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         kapt {
             arguments {
@@ -33,15 +34,17 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug{
+            consumerProguardFiles 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    kapt deps.arouter_compiler
+
 
     api deps.androidx.androidx
     api deps.androidx.constraintlayout
@@ -65,22 +68,29 @@ dependencies {
     api deps.converter_gson
     api deps.adapter_rxjava
 
+    api 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+
     api deps.gson
+    api 'pub.devrel:easypermissions:3.0.0'
+
 
     api deps.glide
-    annotationProcessor deps.glide_compiler
-    api 'com.alibaba:fastjson:1.2.33'
+    kapt deps.glide_compiler
+    api 'org.litepal.android:core:2.0.0'
+
+//    api 'com.contrarywind:Android-PickerView:4.1.8'
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
+    api 'cn.yipianfengye.android:zxing-library:2.2'
+    api 'me.leolin:ShortcutBadger:1.1.22@aar'
+    implementation 'com.ycjiang:ImagePreview:2.2.5'
 
     api deps.arouter_api
     api deps.acra
 
     api deps.kotlin.stdlib
-
-    //recyclerview的databinding套装
-    api "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.2.0"
-    api "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0"
+    api deps.androidx.kotlinKtx
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

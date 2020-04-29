@@ -35,6 +35,8 @@ import static com.kjq.common.utils.data.Constant.AppInfo.TITLE_HEIGHT;
 public class BaseTitle {
 
     private CommonDefaultTitleBinding mBinding ;
+    private boolean mB_isCreate = false;
+
     private BaseTitle(Activity activity, BaseViewModel viewModel) {
         insertRootLayout(activity,viewModel);
     }
@@ -48,26 +50,19 @@ public class BaseTitle {
             LinearLayout rootView = (LinearLayout) sRootView;
             mBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.common_default_title, null, false);
             mBinding.setBaseViewModel(baseViewModel);
-
             View sView = mBinding.getRoot();
             int sI_height = ScreenSizeUtils.INSTANCE.dp2px(activity, TITLE_HEIGHT);
-//            int top = 0;
-//            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
-//                top = Utils.getStatusBarHeight(mActivity);
-//                view.setPadding(0,top,0,0);
-//            }
-//            LinearLayout.LayoutParams sLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, sI_height+top);
             LinearLayout.LayoutParams sLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, sI_height);
             sView.setLayoutParams(sLayoutParams);
             rootView.addView(sView, 0);
             try {
                 AppCompatActivity sAppCompatActivity = (AppCompatActivity) activity;
                 sAppCompatActivity.setSupportActionBar((Toolbar) sView.findViewById(R.id.common_defaultTitle_toolbar));
+                mB_isCreate = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
 
 
@@ -79,6 +74,10 @@ public class BaseTitle {
 
         public void setVM(BaseViewModel baseViewModel) {
             mBaseTitle.mBinding.setBaseViewModel(baseViewModel);
+        }
+
+        public boolean titleIsCreate (){
+            return mBaseTitle.mB_isCreate;
         }
     }
 }

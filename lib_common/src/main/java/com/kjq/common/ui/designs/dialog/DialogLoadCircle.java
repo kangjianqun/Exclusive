@@ -39,7 +39,7 @@ public class DialogLoadCircle {
 //        显示文本
         textView.setText(msg);
 //        创建自定义样式
-        Dialog _dialog = new Dialog(activity, R.style.CommonDialog);
+        Dialog _dialog = new Dialog(activity, R.style.CommonLoadDialog);
 //        设置返回键无效
 //        _dialog.setCancelable(false);
         DisplayMetrics dm = new DisplayMetrics();
@@ -53,12 +53,16 @@ public class DialogLoadCircle {
     private static Dialog mDialog;
     //    打开
     public static void showDialog(Activity activity,String msg){
-        if (mDialog == null){
-            mDialog = DialogLoadCircle.createDialog(activity,msg);
-            mDialog.show();
-        }else {
-            closeDialog();
-            showDialog(activity,msg);
+        try {
+            if (mDialog == null){
+                mDialog = DialogLoadCircle.createDialog(activity,msg);
+                mDialog.show();
+            }else {
+                closeDialog();
+                showDialog(activity,msg);
+            }
+        }catch (Exception e ){
+            e.printStackTrace();
         }
     }
 

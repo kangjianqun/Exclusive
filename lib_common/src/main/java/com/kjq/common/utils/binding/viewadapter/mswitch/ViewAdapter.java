@@ -34,7 +34,7 @@ public class ViewAdapter {
             mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    changeListener.execute(isChecked);
+                    changeListener.execute(mSwitch,isChecked);
                 }
             });
         }

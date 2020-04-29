@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableBoolean;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.kjq.common.utils.binding.command.BindingCommand;
@@ -70,16 +71,30 @@ public class ViewAdapter {
                 });
     }
 
+//    @BindingAdapter(value = {"commonSecondaryTxt"})
+//    public static void commonSecondaryTxt(CustomMenu customMenu,String content){
+//        customMenu.setS_secondaryTxt(content);
+//    }
+
+    @BindingAdapter(value = {"commonActivated"})
+    public static void setCommonActivated(View view, ObservableBoolean observableBoolean){
+        view.setActivated(observableBoolean.get());
+    }
+    @BindingAdapter(value = {"commonActivated"})
+    public static void setCommonActivated(View view, boolean observableBoolean){
+        view.setActivated(observableBoolean);
+    }
+
     /**
      * 回调控件本身
      *
-     * @param currentView
+     * @param view
      * @param bindingCommand
      */
-    @BindingAdapter(value = {"currentView"}, requireAll = false)
-    public static void replyCurrentView(View currentView, BindingCommand bindingCommand) {
+    @BindingAdapter(value = {"currentView"})
+    public static void replyCurrentView(View view, BindingCommand bindingCommand) {
         if (bindingCommand != null) {
-            bindingCommand.execute(currentView);
+            bindingCommand.execute(view);
         }
     }
 

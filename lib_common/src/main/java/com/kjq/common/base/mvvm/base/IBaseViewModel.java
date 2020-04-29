@@ -1,5 +1,7 @@
 package com.kjq.common.base.mvvm.base;
 
+import android.view.View;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -23,11 +25,12 @@ public interface IBaseViewModel extends LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     void onStart();
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    void onResume();
+
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     void onStop();
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    void onResume();
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     void onPause();

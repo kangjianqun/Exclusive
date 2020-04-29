@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.kjq.common.ui.designs.popMenu.FreedomPopupVM" />
+        <variable
+            name="adapter"
+            type="com.kjq.common.base.mvvm.adapter.BindingRecyclerViewAdapter" />
+        <import type="com.kjq.common.base.mvvm.adapter.LayoutManagers" />
+        <import type="com.kjq.common.utils.binding.viewadapter.recyclerview.LineManagers" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/common_pRView_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_shape_popup_bg"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:adapter="@{adapter}"
+        app:itemBinding="@{viewModel.mItemBinding}"
+        app:items="@{viewModel.mObservableList}"
+        app:layoutManager="@{LayoutManagers.linear()}"
+        app:lineManager="@{LineManagers.horizontal()}"/>
+</layout>

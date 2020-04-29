@@ -37,11 +37,11 @@ public class LinearLayoutExtend extends LinearLayout {
     private void initAttrs(Context context, AttributeSet attrs) {
         @SuppressLint("CustomViewStyleable")
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.CommonLinearLayoutExtend);
+                R.styleable.LinearLayoutExtend);
         final int count = a.getIndexCount();
         for (int i = 0; i < count; ++i) {
             int attr = a.getIndex(i);
-            if (attr == R.styleable.CommonLinearLayoutExtend_commonLLExtendMaxHeight) {
+            if (attr == R.styleable.LinearLayoutExtend_commonLLExtendMaxHeight) {
                 mMaxHeight = a.getDimension(attr, DEFAULT_MAX_HEIGHT);
             }
         }

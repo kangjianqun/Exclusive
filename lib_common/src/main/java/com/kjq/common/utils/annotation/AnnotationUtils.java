@@ -8,7 +8,7 @@ import androidx.databinding.ObservableField;
 import com.kjq.common.utils.data.BooleanUtils;
 import com.kjq.common.utils.data.IntUtil;
 import com.kjq.common.utils.data.StringUtils;
-import com.kjq.common.utils.json.JSONUtils;
+import com.kjq.common.utils.data.JSONUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,9 +19,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 
-
+/**
+ * 注解工具
+ *
+ * <ul>
+ * <li>{@link KeyValue} </li>
+ * </ul>
+ */
 public class AnnotationUtils {
-
 
     /**
      * 自动给对象属性添加值

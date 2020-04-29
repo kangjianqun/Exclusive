@@ -167,9 +167,9 @@ public class SeekArc extends View {
         if (attrs != null) {
             // Attribute initialization
             final TypedArray a = context.obtainStyledAttributes(attrs,
-                    R.styleable.CommonSeekArc, defStyle, 0);
+                    R.styleable.SeekArc, defStyle, 0);
 
-            Drawable thumb = a.getDrawable(R.styleable.CommonSeekArc_commonThumb);
+            Drawable thumb = a.getDrawable(R.styleable.SeekArc_commonThumb);
             if (thumb != null) {
                 mThumb = thumb;
             }
@@ -181,25 +181,25 @@ public class SeekArc extends View {
             mThumb.setBounds(-thumbHalfWidth, -thumbHalfheight, thumbHalfWidth,
                     thumbHalfheight);
 
-            mMax = a.getInteger(R.styleable.CommonSeekArc_commonMax, mMax);
-            mProgress = a.getInteger(R.styleable.CommonSeekArc_commonProgressMy, mProgress);
+            mMax = a.getInteger(R.styleable.SeekArc_commonMax, mMax);
+            mProgress = a.getInteger(R.styleable.SeekArc_commonProgressMy, mProgress);
             mProgressWidth = (int) a.getDimension(
-                    R.styleable.CommonSeekArc_commonProgressWidth, mProgressWidth);
-            mArcWidth = (int) a.getDimension(R.styleable.CommonSeekArc_commonArcWidth,
+                    R.styleable.SeekArc_commonProgressWidth, mProgressWidth);
+            mArcWidth = (int) a.getDimension(R.styleable.SeekArc_commonArcWidth,
                     mArcWidth);
-            mStartAngle = a.getInt(R.styleable.CommonSeekArc_commonStartAngle, mStartAngle);
-            mSweepAngle = a.getInt(R.styleable.CommonSeekArc_commonSweepAngle, mSweepAngle);
-            mRotation = a.getInt(R.styleable.CommonSeekArc_commonRotationMy, mRotation);
-            mRoundedEdges = a.getBoolean(R.styleable.CommonSeekArc_commonRoundEdges,
+            mStartAngle = a.getInt(R.styleable.SeekArc_commonStartAngle, mStartAngle);
+            mSweepAngle = a.getInt(R.styleable.SeekArc_commonSweepAngle, mSweepAngle);
+            mRotation = a.getInt(R.styleable.SeekArc_commonRotationMy, mRotation);
+            mRoundedEdges = a.getBoolean(R.styleable.SeekArc_commonRoundEdges,
                     mRoundedEdges);
-            mTouchInside = a.getBoolean(R.styleable.CommonSeekArc_commonTouchInside,
+            mTouchInside = a.getBoolean(R.styleable.SeekArc_commonTouchInside,
                     mTouchInside);
-            mClockwise = a.getBoolean(R.styleable.CommonSeekArc_commonClockwise,
+            mClockwise = a.getBoolean(R.styleable.SeekArc_commonClockwise,
                     mClockwise);
-            mEnabled = a.getBoolean(R.styleable.CommonSeekArc_commonEnabled, mEnabled);
+            mEnabled = a.getBoolean(R.styleable.SeekArc_commonEnabled, mEnabled);
 
-            arcColor = a.getColor(R.styleable.CommonSeekArc_commonArcColor, arcColor);
-            progressColor = a.getColor(R.styleable.CommonSeekArc_commonProgressColor,
+            arcColor = a.getColor(R.styleable.SeekArc_commonArcColor, arcColor);
+            progressColor = a.getColor(R.styleable.SeekArc_commonProgressColor,
                     progressColor);
 
             a.recycle();

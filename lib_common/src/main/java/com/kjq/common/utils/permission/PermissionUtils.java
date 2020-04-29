@@ -11,6 +11,10 @@ import java.util.List;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * 自我检查权限
  *
@@ -114,7 +118,8 @@ public class PermissionUtils {
     /**
      * 检查权限
      */
-    public static boolean checkPermission(Activity activity,ArrayList<String> requestList){
+    @Contract("null, _ -> true")
+    public static boolean checkPermission(Activity activity, ArrayList<String> requestList){
         if (activity == null||Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
             return true;
         }
@@ -163,7 +168,8 @@ public class PermissionUtils {
         }
     }
 
-    private static ArrayList<String> getNoGrantedPermission(Activity activity,String[] sSList) {
+    @Nullable
+    private static ArrayList<String> getNoGrantedPermission(Activity activity, @NotNull String[] sSList) {
         ArrayList<String> permissions = new ArrayList<>();
         for (String requestPermission : sSList) {
             //TODO checkSelfPermission

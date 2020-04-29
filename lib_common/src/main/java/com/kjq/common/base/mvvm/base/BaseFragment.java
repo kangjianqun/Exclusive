@@ -1,10 +1,8 @@
 package com.kjq.common.base.mvvm.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,26 +16,33 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.kjq.common.ui.designs.title.BaseTitle;
-import com.kjq.common.utils.bus.Messenger;
+import com.kjq.common.utils.hint.ToastUtils;
+import com.kjq.common.utils.performance.bus.Messenger;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 
 /**
- * Created by goldze on 2017/6/15.
+ * Created by kjq on 2019/5/20.
  */
-public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment implements IBaseView {
+public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment
+        implements IBaseView ,IBackListener, EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks {
     protected V binding;
     protected VM viewModel;
     private int viewModelId;
     private BaseActivity mBaseActivity;
-    public BaseTitle.Builder mBuilder;
-//    private MaterialDialog dialog;
-
+    private BaseTitle.Builder mBuilder;
+    private Bundle mFragmentOfBundle;
+    private Intent mActivityIntent;
+    private boolean mB_dataFirst = true;
 
     @Override
     public void onAttach(Activity activity) {
@@ -66,6 +71,12 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         return binding.getRoot();
     }
 
+    /* 是否监听了返回 */
+    @Override
+    public boolean onBackPressed() {
+        return viewModel.onBackPressed();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -87,16 +98,24 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         mBuilder = mBaseActivity.mBuilder;
         //私有的初始化Databinding和ViewModel方法
         initViewDataBinding();
+        // 给viewModel 传递需要的参数
+        transmitParam();
         //私有的ViewModel与View的契约事件回调逻辑
         registeredUIChangeLiveDataCallBack();
         //页面数据初始化方法
-        initData();
+        disposeData();
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable();
         //注册RxBus
         viewModel.registerRxBus();
     }
 
+    /**
+     * 传递参数给viewMode使用
+     */
+    private void transmitParam(){
+        viewModel.initParam(mFragmentOfBundle,mActivityIntent);
+    }
     /**
      * 注入绑定
      */
@@ -129,9 +148,42 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     private void initTitle(){
-//        BaseTitle.insertRootLayout(getActivity(),viewModel);
-        mBuilder.setVM(viewModel);
-        viewModel.initToolbar();
+        if (mBuilder != null){
+            if (mBuilder.titleIsCreate()){
+                mBuilder.setVM(viewModel);
+                viewModel.initToolbar();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        // 授予权限
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        // （可选）检查用户是否拒绝任何权限并选中“从不再问”。 这将显示一个对话框，指示他们在应用程序设置中启用权限。
+    }
+
+    @Override
+    public void onRationaleAccepted(int requestCode) {
+
+    }
+
+    @Override
+    public void onRationaleDenied(int requestCode) {
+
+    }
+
+    public void toastShow(CharSequence msg){
+        ToastUtils.showShort(msg);
     }
 
     /**
@@ -151,6 +203,13 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissDialog();
+            }
+        });
+
+        viewModel.getUC().getRefreshVMBindingEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(Void aVoid) {
+                refreshVMBinding();
             }
         });
 
@@ -191,7 +250,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModel.getUC().getOnBackPressedEvent().observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
-                getActivity().onBackPressed();
+                removeFragment();
             }
         });
     }
@@ -234,6 +293,22 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         startActivity(intent);
     }
 
+    public void startActivity(String path,Bundle bundle){
+        Object sO = ARouter.getInstance().build(path).navigation();
+        if (sO instanceof BaseActivity){
+            BaseActivity sBaseActivity = (BaseActivity) sO;
+            startActivity(sBaseActivity.getClass(),bundle);
+        }
+    }
+
+    public void startActivity(String path){
+        Object sO = ARouter.getInstance().build(path).navigation();
+        if (sO instanceof BaseActivity){
+            BaseActivity sBaseActivity = (BaseActivity) sO;
+            startActivity(sBaseActivity.getClass());
+        }
+    }
+
     /**
      * 跳转容器页面
      *
@@ -251,9 +326,9 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
      */
     public void startGeneralShowActivity(String sPath, Bundle bundle) {
         if (bundle == null){
-            startActivity(GeneralShowActivity.getNewIntent(getContext(),sPath));
+            startActivity(BaseGeneralShowActivity.getNewIntent(getContext(),sPath));
         }else {
-            startActivity(GeneralShowActivity.getNewIntent(getContext(),sPath,bundle));
+            startActivity(BaseGeneralShowActivity.getNewIntent(getContext(),sPath,bundle));
         }
     }
 
@@ -271,17 +346,17 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         }
     }
 
-//    /*移除fragment*/
-//    protected void removeFragment() {
-//        mBaseActivity.removeFragment();
-//    }
+    /*移除fragment*/
+    protected void removeFragment() {
+        mBaseActivity.removeFragment();
+    }
 
     /**
      * =====================================================================
      **/
 
     //刷新布局
-    public void refreshLayout() {
+    public void refreshVMBinding() {
         if (viewModel != null) {
             binding.setVariable(viewModelId, viewModel);
         }
@@ -289,7 +364,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
 
     @Override
     public void initParam(Bundle fragmentOfBundle, Intent activityIntent) {
-
+        mFragmentOfBundle = fragmentOfBundle;
+        mActivityIntent = activityIntent;
     }
 
     /**
@@ -311,12 +387,31 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
      *
      * @return 继承BaseViewModel的ViewModel
      */
-    public VM initViewModel() {
+    protected VM initViewModel() {
         return null;
     }
 
+    private void disposeData(){
+        if (mB_dataFirst){
+            initData();
+            mB_dataFirst = !mB_dataFirst;
+        }
+        refreshData();
+    }
+
+    /**
+     * 生命周期中只执行一次
+     */
     @Override
     public void initData() {
+
+    }
+
+    /**
+     * 生命周期中每次都会执行
+     */
+    @Override
+    public void refreshData() {
 
     }
 

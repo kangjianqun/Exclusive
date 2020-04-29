@@ -122,6 +122,13 @@ public abstract class DialogCView extends DialogBase {
         super.show(viewEven);
     }
 
+    @Override
+    public void show(ViewEven even) {
+        setViewEven(even);
+        setViewInfo(getView());
+        super.show(even);
+    }
+
     void setTimeSelectDialog(String hour, String minute){
         int sI_hour = 8,sI_minute = 30;
         final CommonDialogTimeSelectDefaultBinding sBinding = DataBindingUtil.bind(getView());

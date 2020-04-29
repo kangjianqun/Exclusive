@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.databinding.BindingAdapter;
 
+import com.kjq.common.ui.designs.EditTextExtend;
 import com.kjq.common.utils.binding.command.BindingCommand;
 
 /**

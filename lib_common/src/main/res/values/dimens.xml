@@ -3,4 +3,12 @@
     <dimen name="commonDefaultH">100dp</dimen>
     <dimen name="commonDefaultW">100dp</dimen>
     <dimen name="common4">4dp</dimen>
+    <dimen name="common_readingMarginWidth">15dp</dimen>
+    <dimen name="common_readingMarginHeight">30dp</dimen>
+    <dimen name="common_reading_status_margin_bottom">30dp</dimen>
+    <dimen name="common_reading_line_spacing">10dp</dimen>
+    <dimen name="common_reading_paragraph_spacing">30dp</dimen>
+    <dimen name="common_reading_max_text_size">30sp</dimen>
+    <dimen name="common_reading_board_battery_border_width">1dp</dimen>
+    <dimen name="common_pickerview_textsize">20sp</dimen>
 </resources>
